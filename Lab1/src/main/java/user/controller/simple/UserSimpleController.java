@@ -1,7 +1,9 @@
 package user.controller.simple;
 
 import user.controller.api.UserController;
+import user.dto.GetUserResponse;
 import user.dto.GetUsersResponse;
+import user.dto.function.UserToResponseFunction;
 import user.dto.function.UsersToResponseFunction;
 import user.entity.User;
 
@@ -26,5 +28,20 @@ public class UserSimpleController implements UserController {
                 .build());
 
         return new UsersToResponseFunction().apply(users);
+    }
+
+    @Override
+    public GetUserResponse getUser(UUID uuid) {
+        User user = User.builder()
+                .id(UUID.fromString("12345678-BBBB-BBBB-BBBB-123456789ABC"))
+                .nick("Second :(")
+                .login("im-the-one")
+                .password("pass")
+                .birthDate(LocalDate.now())
+                .roles(null)
+                .reputation(10)
+                .tutorials(null)
+                .build();
+        return new UserToResponseFunction().apply(user);
     }
 }

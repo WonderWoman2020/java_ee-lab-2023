@@ -1,5 +1,6 @@
 package user.controller.api;
 
+import user.dto.GetUserResponse;
 import user.dto.GetUsersResponse;
 
 import java.util.UUID;
@@ -8,9 +9,9 @@ public interface UserController {
 
     GetUsersResponse getUsers();
 
-    //GetCharactersResponse getUserTutorials(UUID id);
+    GetUserResponse getUser(UUID uuid);
 
-    //GetCharacterResponse getUser(UUID uuid);
+    //GetCharactersResponse getUserTutorials(UUID id);
 
     //void putUser(UUID id, PutCharacterRequest request);
 

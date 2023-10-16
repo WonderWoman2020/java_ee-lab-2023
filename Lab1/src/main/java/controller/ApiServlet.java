@@ -92,6 +92,8 @@ public class ApiServlet extends HttpServlet {
 
         public static final Pattern USERS = Pattern.compile("/users/?");
 
+        public static final Pattern USER = Pattern.compile("/users/(%s)".formatted(UUID.pattern()));
+
     }
 
     /**
@@ -158,7 +160,13 @@ public class ApiServlet extends HttpServlet {
                 response.setContentType("application/json");
                 response.getWriter().write(jsonb.toJson(userController.getUsers()));
                 return;
+            } else if (path.matches(Patterns.USER.pattern())) {
+                response.setContentType("application/json");
+                UUID uuid = extractUuid(Patterns.USER, path);
+                response.getWriter().write(jsonb.toJson(userController.getUser(uuid)));
+                return;
             }
+
         }
         response.sendError(HttpServletResponse.SC_BAD_REQUEST);
     }

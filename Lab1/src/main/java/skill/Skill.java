@@ -1,3 +1,7 @@
+package skill;
+
+import tutorial.Tutorial;
+
 import java.util.List;
 
 public class Skill {

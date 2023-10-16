@@ -1,3 +1,8 @@
+package tutorial;
+
+import skill.Skill;
+import user.User;
+
 public class Tutorial {
 
     private String title;

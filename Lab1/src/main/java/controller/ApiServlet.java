@@ -8,6 +8,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import user.controller.api.UserController;
+import user.controller.simple.UserSimpleController;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -33,6 +35,8 @@ public class ApiServlet extends HttpServlet {
      * Controller for managing collections professions' representations.
      */
     //private ProfessionController professionController;
+
+    private UserController userController;
 
     /**
      * Definition of paths supported by this servlet. Separate inner class provides composition for static fields.
@@ -86,6 +90,8 @@ public class ApiServlet extends HttpServlet {
          */
         public static final Pattern USER_CHARACTERS = Pattern.compile("/users/(%s)/characters/?".formatted(UUID.pattern()));
 
+        public static final Pattern USERS = Pattern.compile("/users/?");
+
     }
 
     /**
@@ -109,6 +115,7 @@ public class ApiServlet extends HttpServlet {
         super.init();
         //characterController = (CharacterController) getServletContext().getAttribute("characterController");
         //professionController = (ProfessionController) getServletContext().getAttribute("professionController");
+        userController = new UserSimpleController();
     }
 
     @SuppressWarnings("RedundantThrows")
@@ -146,6 +153,10 @@ public class ApiServlet extends HttpServlet {
                 //byte[] portrait = characterController.getCharacterPortrait(uuid);
                 //response.setContentLength(portrait.length);
                 //response.getOutputStream().write(portrait);
+                return;
+            } else if (path.matches(Patterns.USERS.pattern())) {
+                response.setContentType("application/json");
+                response.getWriter().write(jsonb.toJson(userController.getUsers()));
                 return;
             }
         }

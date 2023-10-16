@@ -1,11 +1,20 @@
 package user.entity;
 
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 import tutorial.entity.Tutorial;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
+@Getter
+@Setter
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@ToString()
+@EqualsAndHashCode()
 public class User {
     private UUID id;
     private String nick;

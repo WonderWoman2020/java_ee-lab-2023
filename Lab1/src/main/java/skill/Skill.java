@@ -3,9 +3,11 @@ package skill;
 import tutorial.Tutorial;
 
 import java.util.List;
+import java.util.UUID;
 
 public class Skill {
 
+    private UUID id;
     private String name;
     private String description;
     private DifficultyLevel level;

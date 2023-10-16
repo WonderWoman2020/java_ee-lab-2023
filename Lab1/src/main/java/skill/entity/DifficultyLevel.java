@@ -1,4 +1,4 @@
-package skill;
+package skill.entity;
 
 public enum DifficultyLevel {
     EASY,

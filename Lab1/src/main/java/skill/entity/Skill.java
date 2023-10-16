@@ -1,6 +1,6 @@
-package skill;
+package skill.entity;
 
-import tutorial.Tutorial;
+import tutorial.entity.Tutorial;
 
 import java.util.List;
 import java.util.UUID;

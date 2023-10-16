@@ -1,7 +1,7 @@
-package tutorial;
+package tutorial.entity;
 
-import skill.Skill;
-import user.User;
+import skill.entity.Skill;
+import user.entity.User;
 
 import java.util.UUID;
 

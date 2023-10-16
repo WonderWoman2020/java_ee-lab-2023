@@ -1,6 +1,6 @@
-package user;
+package user.entity;
 
-import tutorial.Tutorial;
+import tutorial.entity.Tutorial;
 
 import java.time.LocalDate;
 import java.util.List;

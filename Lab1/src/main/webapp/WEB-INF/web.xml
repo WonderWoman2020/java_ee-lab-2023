@@ -9,4 +9,8 @@
         <listener-class>configuration.listener.CreateDataSource</listener-class>
     </listener>
 
+    <listener>
+        <listener-class>configuration.listener.CreateControllers</listener-class>
+    </listener>
+
 </web-app>

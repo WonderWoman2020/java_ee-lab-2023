@@ -1,5 +1,8 @@
 package user.controller.simple;
 
+import datastore.component.DataStore;
+import lombok.Getter;
+import lombok.Setter;
 import user.controller.api.UserController;
 import user.dto.GetUserResponse;
 import user.dto.GetUsersResponse;
@@ -12,7 +15,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@Getter // tymczas.
+@Setter // tymczas.
 public class UserSimpleController implements UserController {
+
+    /**
+     * Underlying data store. In future should be replaced with database connection.
+     */
+    //private final DataStore store = null; // tymczas.
+    private DataStore store = null; // tymczas.
     @Override
     public GetUsersResponse getUsers() {
         List<User> users = new ArrayList<>();

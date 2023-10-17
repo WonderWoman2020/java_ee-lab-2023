@@ -15,11 +15,12 @@ public class InitializedData implements ServletContextListener {
      * User service.
      */
     //private UserService userService;
-    private UserController userService;
+    private UserController userController;
 
     @Override
     public void contextInitialized(ServletContextEvent event) {
-        userService = (UserController) event.getServletContext().getAttribute("userService");
+        //userService = (UserController) event.getServletContext().getAttribute("userService");
+        userController = (UserController) event.getServletContext().getAttribute("userController");
         init();
     }
 

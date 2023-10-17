@@ -5,8 +5,12 @@ import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
 import lombok.SneakyThrows;
 import user.controller.api.UserController;
+import user.controller.simple.UserSimpleController;
+import user.entity.User;
 
 import java.io.InputStream;
+import java.time.LocalDate;
+import java.util.UUID;
 
 @WebListener
 public class InitializedData implements ServletContextListener {
@@ -15,18 +19,29 @@ public class InitializedData implements ServletContextListener {
      * User service.
      */
     //private UserService userService;
-    private UserController userController;
+    private UserSimpleController userController;
 
     @Override
     public void contextInitialized(ServletContextEvent event) {
         //userService = (UserController) event.getServletContext().getAttribute("userService");
-        userController = (UserController) event.getServletContext().getAttribute("userController");
+        userController = (UserSimpleController) event.getServletContext().getAttribute("userController");
         init();
     }
 
     private void init()
     {
+        User user1 = User.builder()
+                .id(UUID.fromString("12345678-BBBB-BBBB-BBBB-123456789ABC"))
+                .nick("Second :(")
+                .login("im-the-one")
+                .password("pass")
+                .birthDate(LocalDate.now())
+                .roles(null)
+                .reputation(10)
+                .tutorial(null)
+                .build();
 
+        userController.create(user1);
     }
 
     /**

@@ -117,7 +117,7 @@ public class ApiServlet extends HttpServlet {
         super.init();
         //characterController = (CharacterController) getServletContext().getAttribute("characterController");
         //professionController = (ProfessionController) getServletContext().getAttribute("professionController");
-        userController = new UserSimpleController();
+        userController = (UserSimpleController) getServletContext().getAttribute("userController");
     }
 
     @SuppressWarnings("RedundantThrows")

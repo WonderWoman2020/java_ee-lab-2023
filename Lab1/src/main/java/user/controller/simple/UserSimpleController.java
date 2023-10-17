@@ -10,9 +10,12 @@ import user.dto.function.UserToResponseFunction;
 import user.dto.function.UsersToResponseFunction;
 import user.entity.User;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Getter // tymczas.
@@ -23,7 +26,7 @@ public class UserSimpleController implements UserController {
      * Underlying data store. In future should be replaced with database connection.
      */
     //private final DataStore store = null; // tymczas.
-    private DataStore store = null; // tymczas.
+    private DataStore store; // tymczas.
     @Override
     public GetUsersResponse getUsers() {
         List<User> users = new ArrayList<>();
@@ -43,7 +46,7 @@ public class UserSimpleController implements UserController {
 
     @Override
     public GetUserResponse getUser(UUID uuid) {
-        User user = User.builder()
+        /*User user = User.builder()
                 .id(UUID.fromString("12345678-BBBB-BBBB-BBBB-123456789ABC"))
                 .nick("Second :(")
                 .login("im-the-one")
@@ -52,7 +55,65 @@ public class UserSimpleController implements UserController {
                 .roles(null)
                 .reputation(10)
                 .tutorial(null)
-                .build();
-        return new UserToResponseFunction().apply(user);
+                .build();*/
+
+        Optional<User> user = find(null);
+        // tu sobie może polecieć na razie błąd
+        return new UserToResponseFunction().apply(user.get());
     }
+
+    //tymczas
+    public Optional<User> find(UUID id) {
+
+        //return characterRepository.find(id);
+        List<User> users = store.findAllUsers();
+        if(users != null)
+            return Optional.ofNullable(users.get(0));
+        else
+            return Optional.empty();
+    }
+
+    public List<User> findAll() {
+
+        //return characterRepository.findAll();
+        return store.findAllUsers();
+    }
+
+    public void create(User user) {
+
+        //characterRepository.create(user);
+        store.createUser(user);
+    }
+
+    public void update(User user) {
+
+        //characterRepository.update(character);
+        store.updateUser(user);
+    }
+
+    /**
+     * Deletes existing character.
+     *
+     * @param id existing character's id to be deleted
+     */
+    /*public void delete(UUID id) {
+        characterRepository.delete(characterRepository.find(id).orElseThrow());
+    }*/
+
+    /**
+     * Updates portrait of the character.
+     *
+     * @param id character's id
+     * @param is input stream containing new portrait
+     */
+    /*public void updatePortrait(UUID id, InputStream is) {
+        characterRepository.find(id).ifPresent(character -> {
+            try {
+                character.setPortrait(is.readAllBytes());
+                characterRepository.update(character);
+            } catch (IOException ex) {
+                throw new IllegalStateException(ex);
+            }
+        });
+    }*/
 }

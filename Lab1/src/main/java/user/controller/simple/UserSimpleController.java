@@ -24,7 +24,7 @@ public class UserSimpleController implements UserController {
                 .birthDate(LocalDate.now())
                 .roles(null)
                 .reputation(10)
-                .tutorials(null)
+                .tutorial(null)
                 .build());
 
         return new UsersToResponseFunction().apply(users);
@@ -40,7 +40,7 @@ public class UserSimpleController implements UserController {
                 .birthDate(LocalDate.now())
                 .roles(null)
                 .reputation(10)
-                .tutorials(null)
+                .tutorial(null)
                 .build();
         return new UserToResponseFunction().apply(user);
     }

@@ -41,4 +41,11 @@ public class UserInMemoryRepository implements UserRepository {
     public void delete(User entity) {
         throw new UnsupportedOperationException("Operation not implemented.");
     }
+
+    @Override
+    public Optional<User> findByLogin(String login) {
+        return store.findAllUsers().stream()
+                .filter(user -> user.getLogin().equals(login))
+                .findFirst();
+    }
 }

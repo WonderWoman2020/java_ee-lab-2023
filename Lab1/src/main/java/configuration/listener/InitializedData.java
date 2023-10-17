@@ -52,8 +52,33 @@ public class InitializedData implements ServletContextListener {
                 .tutorial(null)
                 .build();
 
+        User user3 = User.builder()
+                .id(UUID.fromString("12345678-CCCC-CCCC-CCCC-123456789ABC"))
+                .nick("anonymous")
+                .login("login-of-a-user")
+                .password("SneakyPassword")
+                .birthDate(LocalDate.now())
+                .roles(null)
+                .reputation(20)
+                .tutorial(null)
+                .build();
+
+        User user4 = User.builder()
+                .id(UUID.fromString("12345678-DDDD-DDDD-DDDD-123456789ABC"))
+                .nick("average-music-enjoyer")
+                .login("music-login")
+                .password("MyFavouriteSong!")
+                .birthDate(LocalDate.now())
+                .roles(null)
+                .reputation(30)
+                .tutorial(null)
+                .build();
+
         userController.create(user1);
         userController.create(user2);
+        userController.create(user3);
+        userController.create(user4);
+
     }
 
     /**

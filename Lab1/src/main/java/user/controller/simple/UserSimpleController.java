@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import controller.exception.*;
+
 @Getter // tymczas.
 @Setter // tymczas.
 public class UserSimpleController implements UserController {
@@ -57,20 +59,26 @@ public class UserSimpleController implements UserController {
                 .tutorial(null)
                 .build();*/
 
-        Optional<User> user = find(null);
+        return find(uuid).map(new UserToResponseFunction())
+                .orElseThrow(NotFoundException::new);
         // tu sobie może polecieć na razie błąd
-        return new UserToResponseFunction().apply(user.get());
+        //return new UserToResponseFunction().apply(user.get());
     }
 
     //tymczas
     public Optional<User> find(UUID id) {
 
         //return characterRepository.find(id);
-        List<User> users = store.findAllUsers();
+        //tymczas.
+        /*List<User> users = store.findAllUsers();
         if(users != null)
             return Optional.ofNullable(users.get(0));
         else
-            return Optional.empty();
+            return Optional.empty();*/
+
+       return store.findAllUsers().stream()
+                .filter(user -> user.getId().equals(id))
+                .findFirst();
     }
 
     public List<User> findAll() {

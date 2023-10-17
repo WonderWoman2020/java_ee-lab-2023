@@ -31,7 +31,7 @@ public class UserSimpleController implements UserController {
     private DataStore store; // tymczas.
     @Override
     public GetUsersResponse getUsers() {
-        List<User> users = new ArrayList<>();
+        /*List<User> users = new ArrayList<>();
         users.add(User.builder()
                 .id(UUID.fromString("12345678-AAAA-AAAA-AAAA-123456789ABC"))
                 .nick("First!")
@@ -43,39 +43,21 @@ public class UserSimpleController implements UserController {
                 .tutorial(null)
                 .build());
 
-        return new UsersToResponseFunction().apply(users);
+        return new UsersToResponseFunction().apply(users);*/
+        return new UsersToResponseFunction().apply(findAll());
     }
 
     @Override
     public GetUserResponse getUser(UUID uuid) {
-        /*User user = User.builder()
-                .id(UUID.fromString("12345678-BBBB-BBBB-BBBB-123456789ABC"))
-                .nick("Second :(")
-                .login("im-the-one")
-                .password("pass")
-                .birthDate(LocalDate.now())
-                .roles(null)
-                .reputation(10)
-                .tutorial(null)
-                .build();*/
-
+        // tu potem będzie service.find()
         return find(uuid).map(new UserToResponseFunction())
                 .orElseThrow(NotFoundException::new);
-        // tu sobie może polecieć na razie błąd
-        //return new UserToResponseFunction().apply(user.get());
     }
 
     //tymczas
     public Optional<User> find(UUID id) {
 
         //return characterRepository.find(id);
-        //tymczas.
-        /*List<User> users = store.findAllUsers();
-        if(users != null)
-            return Optional.ofNullable(users.get(0));
-        else
-            return Optional.empty();*/
-
        return store.findAllUsers().stream()
                 .filter(user -> user.getId().equals(id))
                 .findFirst();

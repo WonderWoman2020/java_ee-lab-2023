@@ -4,6 +4,7 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 import tutorial.entity.Tutorial;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
@@ -15,7 +16,7 @@ import java.util.UUID;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @ToString()
 @EqualsAndHashCode()
-public class User {
+public class User implements Serializable {
     private UUID id;
     private String nick;
     private String login;
@@ -35,5 +36,6 @@ public class User {
     /**
      * Created tutorials
      */
+    @Singular
     private List<Tutorial> tutorials;
 }

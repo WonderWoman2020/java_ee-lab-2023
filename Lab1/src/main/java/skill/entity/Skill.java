@@ -2,10 +2,12 @@ package skill.entity;
 
 import tutorial.entity.Tutorial;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
-public class Skill {
+
+public class Skill implements Serializable {
 
     private UUID id;
     private String name;

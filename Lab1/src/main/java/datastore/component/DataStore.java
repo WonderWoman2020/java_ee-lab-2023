@@ -21,16 +21,16 @@ public class DataStore {
     /**
      * Component used for creating deep copies.
      */
-    //private final CloningUtility cloningUtility;
-    private final CloningUtility cloningUtility = new CloningUtility();
+    private final CloningUtility cloningUtility;
+    //private final CloningUtility cloningUtility = new CloningUtility();
 
     /**
      * @param cloningUtility component used for creating deep copies
      */
-    /*public DataStore(CloningUtility cloningUtility) {
+    public DataStore(CloningUtility cloningUtility) {
         this.cloningUtility = cloningUtility;
-    }*/
-    public DataStore(){};
+    }
+    //public DataStore(){};
 
     /**
      * Deletes existing character.

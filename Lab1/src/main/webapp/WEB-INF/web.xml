@@ -5,4 +5,8 @@
          version="6.0"
          metadata-complete="false">
 
+    <listener>
+        <listener-class>configuration.listener.CreateDataSource</listener-class>
+    </listener>
+
 </web-app>

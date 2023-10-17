@@ -4,9 +4,8 @@ import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
 import lombok.SneakyThrows;
-import user.controller.api.UserController;
-import user.controller.simple.UserSimpleController;
 import user.entity.User;
+import user.service.UserService;
 
 import java.io.InputStream;
 import java.time.LocalDate;
@@ -18,13 +17,11 @@ public class InitializedData implements ServletContextListener {
     /**
      * User service.
      */
-    //private UserService userService;
-    private UserSimpleController userController;
+    private UserService userService;
 
     @Override
     public void contextInitialized(ServletContextEvent event) {
-        //userService = (UserController) event.getServletContext().getAttribute("userService");
-        userController = (UserSimpleController) event.getServletContext().getAttribute("userController");
+        userService = (UserService) event.getServletContext().getAttribute("userService");
         init();
     }
 
@@ -74,10 +71,10 @@ public class InitializedData implements ServletContextListener {
                 .tutorial(null)
                 .build();
 
-        userController.create(user1);
-        userController.create(user2);
-        userController.create(user3);
-        userController.create(user4);
+        userService.create(user1);
+        userService.create(user2);
+        userService.create(user3);
+        userService.create(user4);
 
     }
 

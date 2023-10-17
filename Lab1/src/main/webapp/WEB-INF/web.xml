@@ -10,6 +10,10 @@
     </listener>
 
     <listener>
+        <listener-class>configuration.listener.CreateServices</listener-class>
+    </listener>
+
+    <listener>
         <listener-class>configuration.listener.CreateControllers</listener-class>
     </listener>
 

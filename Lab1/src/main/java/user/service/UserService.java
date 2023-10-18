@@ -5,6 +5,10 @@ import user.repository.api.UserRepository;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.FileStore;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -50,6 +54,16 @@ public class UserService {
                 throw new IllegalStateException(ex);
             }
         });*/
+    }
+
+    public byte[] findAvatar(UUID id)
+    {
+        InputStream is = this.getClass().getClassLoader().getResourceAsStream("/configuration/avatar/"+id.toString()+".png");
+        try {
+            return is.readAllBytes();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

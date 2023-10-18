@@ -94,6 +94,8 @@ public class ApiServlet extends HttpServlet {
 
         public static final Pattern USER = Pattern.compile("/users/(%s)".formatted(UUID.pattern()));
 
+        public static final Pattern USER_AVATAR = Pattern.compile("/users/(%s)/avatar".formatted(UUID.pattern()));
+
     }
 
     /**
@@ -164,6 +166,13 @@ public class ApiServlet extends HttpServlet {
                 response.setContentType("application/json");
                 UUID uuid = extractUuid(Patterns.USER, path);
                 response.getWriter().write(jsonb.toJson(userController.getUser(uuid)));
+                return;
+            } else if (path.matches(Patterns.USER_AVATAR.pattern())) {
+                response.setContentType("image/png");//could be dynamic but atm we support only one format
+                UUID uuid = extractUuid(Patterns.USER_AVATAR, path);
+                byte[] portrait = userController.getUserAvatar(uuid);
+                response.setContentLength(portrait.length);
+                response.getOutputStream().write(portrait);
                 return;
             }
 

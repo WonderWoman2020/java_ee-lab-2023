@@ -3,6 +3,7 @@ package user.controller.api;
 import user.dto.GetUserResponse;
 import user.dto.GetUsersResponse;
 
+import java.io.InputStream;
 import java.util.UUID;
 
 public interface UserController {
@@ -10,6 +11,10 @@ public interface UserController {
     GetUsersResponse getUsers();
 
     GetUserResponse getUser(UUID uuid);
+
+    public byte[] getUserAvatar(UUID id);
+
+    public void putUserAvatar(UUID id, InputStream portrait);
 
     //GetCharactersResponse getUserTutorials(UUID id);
 

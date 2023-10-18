@@ -3,6 +3,8 @@ package user.service;
 import user.entity.User;
 import user.repository.api.UserRepository;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -38,5 +40,16 @@ public class UserService {
     {
         repository.delete(user);
     }
-    
+
+    public void updateAvatar(UUID id, InputStream is) {
+        /*repository.find(id).ifPresent(user -> {
+            try {
+                //user.setAvatar(is.readAllBytes());
+                repository.update(user);
+            } catch (IOException ex) {
+                throw new IllegalStateException(ex);
+            }
+        });*/
+    }
+
 }

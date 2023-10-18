@@ -36,6 +36,7 @@ public class InitializedData implements ServletContextListener {
                 .roles(null)
                 .reputation(10)
                 .tutorial(null)
+                //.avatar(getResourceAsByteArray("../avatar/calvian.png"))
                 .build();
 
         User user2 = User.builder()
@@ -47,6 +48,7 @@ public class InitializedData implements ServletContextListener {
                 .roles(null)
                 .reputation(10)
                 .tutorial(null)
+                //.avatar(getResourceAsByteArray("../avatar/eloise.png"))
                 .build();
 
         User user3 = User.builder()
@@ -58,6 +60,7 @@ public class InitializedData implements ServletContextListener {
                 .roles(null)
                 .reputation(20)
                 .tutorial(null)
+                //.avatar(getResourceAsByteArray("../avatar/sigrid.png"))
                 .build();
 
         User user4 = User.builder()
@@ -69,6 +72,7 @@ public class InitializedData implements ServletContextListener {
                 .roles(null)
                 .reputation(30)
                 .tutorial(null)
+                //.avatar(getResourceAsByteArray("../avatar/zereni.png"))
                 .build();
 
         userService.create(user1);

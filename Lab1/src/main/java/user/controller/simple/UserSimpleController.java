@@ -6,9 +6,11 @@ import user.dto.GetUsersResponse;
 import user.dto.function.UserToResponseFunction;
 import user.dto.function.UsersToResponseFunction;
 
+import java.io.InputStream;
 import java.util.UUID;
 
 import controller.exception.*;
+import user.entity.User;
 import user.service.UserService;
 
 public class UserSimpleController implements UserController {
@@ -27,6 +29,23 @@ public class UserSimpleController implements UserController {
     public GetUserResponse getUser(UUID uuid) {
         return service.find(uuid).map(new UserToResponseFunction())
                 .orElseThrow(NotFoundException::new);
+    }
+
+    @Override
+    public byte[] getUserAvatar(UUID id) {
+        return null; /*service.find(id)
+                .map(User::getAvatar)
+                .orElseThrow(NotFoundException::new);*/
+    }
+
+    @Override
+    public void putUserAvatar(UUID id, InputStream portrait) {
+        service.find(id).ifPresentOrElse(
+                entity -> service.updateAvatar(id, portrait),
+                () -> {
+                    throw new NotFoundException();
+                }
+        );
     }
 
 }

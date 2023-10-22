@@ -2,6 +2,10 @@
 
 GET http://localhost:8080/Lab1/api/users
 
+###
+
 # Get single user
 
 GET http://localhost:8080/Lab1/api/users/12345678-BBBB-BBBB-BBBB-123456789ABC
+
+###

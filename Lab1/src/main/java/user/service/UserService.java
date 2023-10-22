@@ -54,7 +54,7 @@ public class UserService {
             throw new RuntimeException(e);
         }
         try {
-            Files.write(Path.of(this.avatarsUploadPath+"avatar.png"), is.readAllBytes());
+            Files.write(Path.of(this.avatarsUploadPath+id.toString()+".png"), is.readAllBytes());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -76,8 +76,10 @@ public class UserService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }*/
+        if(!Files.exists(Path.of(this.avatarsUploadPath+id.toString()+".png")))
+            return null;
         try {
-            return Files.readAllBytes(Path.of(this.avatarsUploadPath+"avatar.png"));
+            return Files.readAllBytes(Path.of(this.avatarsUploadPath+id.toString()+".png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

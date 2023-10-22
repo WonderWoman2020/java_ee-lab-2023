@@ -33,7 +33,12 @@ public class UserSimpleController implements UserController {
 
     @Override
     public byte[] getUserAvatar(UUID id) {
-        return service.findAvatar(id); /*service.find(id)
+        byte[] avatar = service.findAvatar(id);
+        if(avatar == null)
+            throw new NotFoundException();
+
+        return avatar;
+        /*service.find(id)
                 .map(User::getAvatar)
                 .orElseThrow(NotFoundException::new);*/
     }

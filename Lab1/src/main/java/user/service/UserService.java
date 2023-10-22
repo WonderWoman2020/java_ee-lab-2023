@@ -5,6 +5,7 @@ import user.repository.api.UserRepository;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.FileStore;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -46,6 +47,12 @@ public class UserService {
     }
 
     public void updateAvatar(UUID id, InputStream is) {
+
+        try {
+            Files.write(Path.of("avatar.txt"), Path.of("avatar.txt").toAbsolutePath().toString().getBytes(StandardCharsets.UTF_8));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         /*repository.find(id).ifPresent(user -> {
             try {
                 //user.setAvatar(is.readAllBytes());
@@ -58,9 +65,14 @@ public class UserService {
 
     public byte[] findAvatar(UUID id)
     {
-        InputStream is = this.getClass().getClassLoader().getResourceAsStream("/configuration/avatar/"+id.toString()+".png");
+        /*InputStream is = this.getClass().getClassLoader().getResourceAsStream("/configuration/avatar/"+id.toString()+".png");
         try {
             return is.readAllBytes();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }*/
+        try {
+            return Files.readAllBytes(Path.of("avatar.txt"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

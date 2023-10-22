@@ -12,6 +12,7 @@ import user.controller.api.UserController;
 import user.controller.simple.UserSimpleController;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -168,11 +169,13 @@ public class ApiServlet extends HttpServlet {
                 response.getWriter().write(jsonb.toJson(userController.getUser(uuid)));
                 return;
             } else if (path.matches(Patterns.USER_AVATAR.pattern())) {
-                response.setContentType("image/png");//could be dynamic but atm we support only one format
+                //response.setContentType("image/png");//could be dynamic but atm we support only one format
+                response.setContentType("text/plain");
                 UUID uuid = extractUuid(Patterns.USER_AVATAR, path);
                 byte[] portrait = userController.getUserAvatar(uuid);
-                response.setContentLength(portrait.length);
-                response.getOutputStream().write(portrait);
+                //response.setContentLength(portrait.length);
+                //response.getOutputStream().write(portrait);
+                response.getWriter().write(new String(portrait, StandardCharsets.UTF_8));
                 return;
             }
 
@@ -192,6 +195,11 @@ public class ApiServlet extends HttpServlet {
             } else if (path.matches(Patterns.CHARACTER_PORTRAIT.pattern())) {
                 UUID uuid = extractUuid(Patterns.CHARACTER_PORTRAIT, path);
                 //characterController.putCharacterPortrait(uuid, request.getPart("portrait").getInputStream());
+                return;
+            }
+            else if (path.matches(Patterns.USER_AVATAR.pattern())) {
+                UUID uuid = extractUuid(Patterns.USER_AVATAR, path);
+                userController.putUserAvatar(uuid, request.getPart("portrait").getInputStream());
                 return;
             }
         }

@@ -17,4 +17,9 @@
         <listener-class>configuration.listener.CreateControllers</listener-class>
     </listener>
 
+    <context-param>
+        <param-name>resourcesPath</param-name>
+        <param-value>/we/will/see/XD</param-value>
+    </context-param>
+
 </web-app>

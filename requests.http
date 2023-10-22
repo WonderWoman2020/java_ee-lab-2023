@@ -9,3 +9,16 @@ GET http://localhost:8080/Lab1/api/users
 GET http://localhost:8080/Lab1/api/users/12345678-BBBB-BBBB-BBBB-123456789ABC
 
 ###
+
+# Create user avatar.
+
+PUT http://localhost:8080/Lab1/api/users/12345678-BBBB-BBBB-BBBB-123456789ABC/avatar
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="portrait"; filename="sigrid.png'
+
+< simple-rpg/src/main/resources/pl/edu/pg/eti/kask/rpg/configuration/avatar/sigrid.png
+--boundary--
+
+###

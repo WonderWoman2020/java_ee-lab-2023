@@ -169,13 +169,13 @@ public class ApiServlet extends HttpServlet {
                 response.getWriter().write(jsonb.toJson(userController.getUser(uuid)));
                 return;
             } else if (path.matches(Patterns.USER_AVATAR.pattern())) {
-                //response.setContentType("image/png");//could be dynamic but atm we support only one format
-                response.setContentType("text/plain");
+                response.setContentType("image/png");//could be dynamic but atm we support only one format
+                //response.setContentType("text/plain");
                 UUID uuid = extractUuid(Patterns.USER_AVATAR, path);
                 byte[] portrait = userController.getUserAvatar(uuid);
-                //response.setContentLength(portrait.length);
-                //response.getOutputStream().write(portrait);
-                response.getWriter().write(new String(portrait, StandardCharsets.UTF_8));
+                response.setContentLength(portrait.length);
+                response.getOutputStream().write(portrait);
+                //response.getWriter().write(new String(portrait, StandardCharsets.UTF_8));
                 return;
             }
 

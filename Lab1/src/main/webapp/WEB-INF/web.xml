@@ -18,8 +18,8 @@
     </listener>
 
     <context-param>
-        <param-name>resourcesPath</param-name>
-        <param-value>/we/will/see/XD</param-value>
+        <param-name>uploadAvatarPath</param-name>
+        <param-value>./uploaded/users/avatar/</param-value>
     </context-param>
 
 </web-app>

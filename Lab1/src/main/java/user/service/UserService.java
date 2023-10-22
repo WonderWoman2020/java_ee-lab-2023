@@ -6,10 +6,8 @@ import user.repository.api.UserRepository;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.FileStore;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -18,8 +16,11 @@ public class UserService {
 
     private final UserRepository repository;
 
-    public UserService(UserRepository repository) {
+    private final String avatarsUploadPath;
+
+    public UserService(UserRepository repository, String avatarsUploadPath) {
         this.repository = repository;
+        this.avatarsUploadPath = avatarsUploadPath;
     }
     public Optional<User> find(UUID id)
     {
@@ -47,9 +48,13 @@ public class UserService {
     }
 
     public void updateAvatar(UUID id, InputStream is) {
-
         try {
-            Files.write(Path.of("avatar.txt"), Path.of("avatar.txt").toAbsolutePath().toString().getBytes(StandardCharsets.UTF_8));
+            Files.createDirectories(Path.of(this.avatarsUploadPath));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            Files.write(Path.of(this.avatarsUploadPath+"avatar.png"), is.readAllBytes());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -72,7 +77,7 @@ public class UserService {
             throw new RuntimeException(e);
         }*/
         try {
-            return Files.readAllBytes(Path.of("avatar.txt"));
+            return Files.readAllBytes(Path.of(this.avatarsUploadPath+"avatar.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -56,4 +56,12 @@ public class UserSimpleController implements UserController {
         );
     }
 
+    @Override
+    public void deleteUserAvatar(UUID id) {
+        if(service.find(id).isEmpty())
+            throw new NotFoundException();
+
+        service.deleteAvatar(id);
+    }
+
 }

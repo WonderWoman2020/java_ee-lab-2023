@@ -15,6 +15,7 @@ public interface UserController {
     public byte[] getUserAvatar(UUID id);
 
     public void putUserAvatar(UUID id, InputStream portrait);
+    void deleteUserAvatar(UUID id);
 
     //GetCharactersResponse getUserTutorials(UUID id);
 

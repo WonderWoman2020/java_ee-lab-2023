@@ -85,4 +85,15 @@ public class UserService {
         }
     }
 
+    public void deleteAvatar(UUID id)
+    {
+        if(!Files.exists(Path.of(this.avatarsUploadPath+id.toString()+".png")))
+            return;
+        try {
+            Files.delete(Path.of(this.avatarsUploadPath + id.toString() + ".png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

@@ -216,6 +216,10 @@ public class ApiServlet extends HttpServlet {
                 UUID uuid = extractUuid(Patterns.CHARACTER, path);
                 //characterController.deleteCharacter(uuid);
                 return;
+            } else if (path.matches(Patterns.USER_AVATAR.pattern())){
+                UUID uuid = extractUuid(Patterns.USER_AVATAR, path);
+                userController.deleteUserAvatar(uuid);
+                return;
             }
         }
         response.sendError(HttpServletResponse.SC_BAD_REQUEST);

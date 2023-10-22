@@ -33,6 +33,9 @@ public class UserSimpleController implements UserController {
 
     @Override
     public byte[] getUserAvatar(UUID id) {
+        if(service.find(id).isEmpty())
+            throw new NotFoundException();
+
         byte[] avatar = service.findAvatar(id);
         if(avatar == null)
             throw new NotFoundException();

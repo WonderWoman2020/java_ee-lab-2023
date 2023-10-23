@@ -3,14 +3,16 @@ package configuration.listener;
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
-import lombok.SneakyThrows;
 import user.entity.User;
 import user.service.UserService;
 
-import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.UUID;
 
+/**
+ * When other listeners are finished and data source, services, and controllers are created, this listener
+ * initializes some example data, so the application can respond to requests even when it just started
+ */
 @WebListener
 public class InitializedData implements ServletContextListener {
 
@@ -36,7 +38,6 @@ public class InitializedData implements ServletContextListener {
                 .roles(null)
                 .reputation(10)
                 .tutorial(null)
-                //.avatar(getResourceAsByteArray("../avatar/calvian.png"))
                 .build();
 
         User user2 = User.builder()
@@ -48,7 +49,6 @@ public class InitializedData implements ServletContextListener {
                 .roles(null)
                 .reputation(10)
                 .tutorial(null)
-                //.avatar(getResourceAsByteArray("../avatar/eloise.png"))
                 .build();
 
         User user3 = User.builder()
@@ -60,7 +60,6 @@ public class InitializedData implements ServletContextListener {
                 .roles(null)
                 .reputation(20)
                 .tutorial(null)
-                //.avatar(getResourceAsByteArray("../avatar/sigrid.png"))
                 .build();
 
         User user4 = User.builder()
@@ -72,7 +71,6 @@ public class InitializedData implements ServletContextListener {
                 .roles(null)
                 .reputation(30)
                 .tutorial(null)
-                //.avatar(getResourceAsByteArray("../avatar/zereni.png"))
                 .build();
 
         userService.create(user1);
@@ -80,20 +78,5 @@ public class InitializedData implements ServletContextListener {
         userService.create(user3);
         userService.create(user4);
 
-    }
-
-    /**
-     * @param name name of the desired resource
-     * @return array of bytes read from the resource
-     */
-    @SneakyThrows
-    private byte[] getResourceAsByteArray(String name) {
-        try (InputStream is = this.getClass().getResourceAsStream(name)) {
-            if (is != null) {
-                return is.readAllBytes();
-            } else {
-                throw new IllegalStateException("Unable to get resource %s".formatted(name));
-            }
-        }
     }
 }

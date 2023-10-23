@@ -7,6 +7,10 @@ import java.util.List;
 import java.util.function.Function;
 
 
+/**
+ * Function to translate an entity class to a contract class, which contains only the fields that we are willing
+ * to show to someone who sent as a request
+ */
 
 public class UsersToResponseFunction implements Function<List<User>, GetUsersResponse> {
 

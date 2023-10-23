@@ -10,7 +10,6 @@ import java.io.InputStream;
 import java.util.UUID;
 
 import controller.exception.*;
-import user.entity.User;
 import user.service.UserService;
 
 public class UserSimpleController implements UserController {
@@ -41,9 +40,6 @@ public class UserSimpleController implements UserController {
             throw new NotFoundException();
 
         return avatar;
-        /*service.find(id)
-                .map(User::getAvatar)
-                .orElseThrow(NotFoundException::new);*/
     }
 
     @Override

@@ -5,7 +5,6 @@ import user.repository.api.UserRepository;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
@@ -58,24 +57,10 @@ public class UserService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        /*repository.find(id).ifPresent(user -> {
-            try {
-                //user.setAvatar(is.readAllBytes());
-                repository.update(user);
-            } catch (IOException ex) {
-                throw new IllegalStateException(ex);
-            }
-        });*/
     }
 
     public byte[] findAvatar(UUID id)
     {
-        /*InputStream is = this.getClass().getClassLoader().getResourceAsStream("/configuration/avatar/"+id.toString()+".png");
-        try {
-            return is.readAllBytes();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }*/
         if(!Files.exists(Path.of(this.avatarsUploadPath+id.toString()+".png")))
             return null;
         try {

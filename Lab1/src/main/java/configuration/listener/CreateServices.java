@@ -14,8 +14,8 @@ public class CreateServices implements ServletContextListener {
         DataStore dataStore = (DataStore) event.getServletContext().getAttribute("datasource");
 
         UserRepository userRepository = new UserInMemoryRepository(dataStore);
-        String avatarsUploadPath = event.getServletContext().getInitParameter("uploadAvatarPath");
-        UserService userService = new UserService(userRepository, avatarsUploadPath);
+        //String avatarsUploadPath = event.getServletContext().getInitParameter("uploadAvatarPath");
+        UserService userService = new UserService(userRepository);
         event.getServletContext().setAttribute("userService", userService);
     }
 }

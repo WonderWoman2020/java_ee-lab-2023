@@ -19,9 +19,9 @@
 
     <!-- Configurable path (not hardcoded in classes sources) to users' avatars location on application server (or location on host machine),
      here relative path to application server's storage root in 'target/liberty/wlp/usr/servers/deafultServer' -->
-    <context-param>
+    <!--<context-param>
         <param-name>uploadAvatarPath</param-name>
         <param-value>./uploaded/users/avatar/</param-value>
-    </context-param>
+    </context-param>-->
 
 </web-app>

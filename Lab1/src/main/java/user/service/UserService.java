@@ -9,17 +9,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
+import java.util.Properties;
 import java.util.UUID;
 
 public class UserService {
 
     private final UserRepository repository;
-
-    private final String avatarsUploadPath;
-
-    public UserService(UserRepository repository, String avatarsUploadPath) {
+    public UserService(UserRepository repository) {
         this.repository = repository;
-        this.avatarsUploadPath = avatarsUploadPath;
     }
     public Optional<User> find(UUID id)
     {
@@ -48,12 +45,12 @@ public class UserService {
 
     public void updateAvatar(UUID id, InputStream is) {
         try {
-            Files.createDirectories(Path.of(this.avatarsUploadPath));
+            Files.createDirectories(Path.of(this.loadAvatarsUploadPath()));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         try {
-            Files.write(Path.of(this.avatarsUploadPath+id.toString()+".png"), is.readAllBytes());
+            Files.write(Path.of(this.loadAvatarsUploadPath()+id.toString()+".png"), is.readAllBytes());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -61,10 +58,10 @@ public class UserService {
 
     public byte[] findAvatar(UUID id)
     {
-        if(!Files.exists(Path.of(this.avatarsUploadPath+id.toString()+".png")))
+        if(!Files.exists(Path.of(this.loadAvatarsUploadPath()+id.toString()+".png")))
             return null;
         try {
-            return Files.readAllBytes(Path.of(this.avatarsUploadPath+id.toString()+".png"));
+            return Files.readAllBytes(Path.of(this.loadAvatarsUploadPath()+id.toString()+".png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -72,10 +69,22 @@ public class UserService {
 
     public void deleteAvatar(UUID id)
     {
-        if(!Files.exists(Path.of(this.avatarsUploadPath+id.toString()+".png")))
+        if(!Files.exists(Path.of(this.loadAvatarsUploadPath()+id.toString()+".png")))
             return;
         try {
-            Files.delete(Path.of(this.avatarsUploadPath + id.toString() + ".png"));
+            Files.delete(Path.of(this.loadAvatarsUploadPath() + id.toString() + ".png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private String loadAvatarsUploadPath()
+    {
+        Properties properties = new Properties();
+        try {
+            InputStream is = this.getClass().getResourceAsStream("/app.config"); //Files.newInputStream(Path.of("app.config"));
+            properties.load(is);
+            return properties.getProperty("uploadAvatarPath");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

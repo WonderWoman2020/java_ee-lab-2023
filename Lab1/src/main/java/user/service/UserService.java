@@ -82,7 +82,7 @@ public class UserService {
     {
         Properties properties = new Properties();
         try {
-            InputStream is = this.getClass().getResourceAsStream("/app.config"); //Files.newInputStream(Path.of("app.config"));
+            InputStream is = this.getClass().getResourceAsStream("/app.config");
             properties.load(is);
             return properties.getProperty("uploadAvatarPath");
         } catch (IOException e) {

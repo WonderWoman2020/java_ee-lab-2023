@@ -9,8 +9,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import skill.controller.api.SkillController;
 import user.controller.api.UserController;
-import user.controller.simple.UserSimpleController;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -31,6 +31,8 @@ public class ApiServlet extends HttpServlet {
      * Controller for managing users' collections representations.
      */
     private UserController userController;
+
+    private SkillController skillController;
 
     /**
      * Definition of paths supported by this servlet. Separate inner class provides composition for static fields.
@@ -92,9 +94,10 @@ public class ApiServlet extends HttpServlet {
      * Only here to hack the fact, that servlets do not have doPatch() method to override
      */
     @Inject
-    public ApiServlet(UserController userController)
+    public ApiServlet(UserController userController, SkillController skillController)
     {
         this.userController = userController;
+        this.skillController = skillController;
     }
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -135,6 +138,10 @@ public class ApiServlet extends HttpServlet {
                 byte[] portrait = userController.getUserAvatar(uuid);
                 response.setContentLength(portrait.length);
                 response.getOutputStream().write(portrait);
+                return;
+            } else if (path.matches(Patterns.SKILLS.pattern())) {
+                response.setContentType("application/json");
+                response.getWriter().write(jsonb.toJson(skillController.getSkills()));
                 return;
             }
 

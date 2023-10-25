@@ -5,7 +5,9 @@ import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import skill.controller.api.SkillController;
 import skill.dto.GetSkillResponse;
+import skill.dto.GetSkillsResponse;
 import skill.dto.function.SkillToResponseFunction;
+import skill.dto.function.SkillsToResponseFunction;
 import skill.service.SkillService;
 import user.dto.function.UserToResponseFunction;
 
@@ -18,6 +20,11 @@ public class SkillSimpleController implements SkillController {
     @Inject
     public SkillSimpleController(SkillService service) {
         this.service = service;
+    }
+
+    @Override
+    public GetSkillsResponse getSkills() {
+        return new SkillsToResponseFunction().apply(service.findAll());
     }
 
     @Override

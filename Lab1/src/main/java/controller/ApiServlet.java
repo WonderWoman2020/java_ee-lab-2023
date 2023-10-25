@@ -1,5 +1,6 @@
 package controller;
 
+import jakarta.inject.Inject;
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
 import jakarta.servlet.ServletException;
@@ -90,6 +91,11 @@ public class ApiServlet extends HttpServlet {
     /**
      * Only here to hack the fact, that servlets do not have doPatch() method to override
      */
+    @Inject
+    public ApiServlet(UserController userController)
+    {
+        this.userController = userController;
+    }
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getMethod().equals("PATCH")) {
@@ -102,11 +108,11 @@ public class ApiServlet extends HttpServlet {
     /**
      * Initialization of fields, fetching values which where set in servlet by some configuration (for example in listeners or web.xml)
      */
-    @Override
+    /*@Override
     public void init() throws ServletException {
         super.init();
         userController = (UserSimpleController) getServletContext().getAttribute("userController");
-    }
+    }*/
 
     @SuppressWarnings("RedundantThrows")
     @Override

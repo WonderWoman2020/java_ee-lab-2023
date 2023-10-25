@@ -1,5 +1,7 @@
 package user.controller.simple;
 
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 import user.controller.api.UserController;
 import user.dto.GetUserResponse;
 import user.dto.GetUsersResponse;
@@ -12,10 +14,12 @@ import java.util.UUID;
 import controller.exception.*;
 import user.service.UserService;
 
+@RequestScoped
 public class UserSimpleController implements UserController {
 
     private UserService service;
 
+    @Inject
     public UserSimpleController(UserService service) {
         this.service = service;
     }

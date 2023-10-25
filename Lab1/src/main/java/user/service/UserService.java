@@ -1,5 +1,9 @@
 package user.service;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
+import lombok.NoArgsConstructor;
 import user.entity.User;
 import user.repository.api.UserRepository;
 
@@ -12,9 +16,13 @@ import java.util.Optional;
 import java.util.Properties;
 import java.util.UUID;
 
+@RequestScoped
+@NoArgsConstructor(force = true)
 public class UserService {
 
     private final UserRepository repository;
+
+    @Inject
     public UserService(UserRepository repository) {
         this.repository = repository;
     }

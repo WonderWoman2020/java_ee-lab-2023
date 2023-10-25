@@ -36,6 +36,7 @@ public class Skill implements Serializable {
     /**
      * Tutorials about that skill
      */
+    @Singular
     private List<Tutorial> tutorials;
 
 }

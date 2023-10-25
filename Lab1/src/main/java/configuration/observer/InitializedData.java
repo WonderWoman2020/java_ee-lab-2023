@@ -6,12 +6,13 @@ import jakarta.enterprise.context.control.RequestContextController;
 import jakarta.enterprise.event.Observes;
 import jakarta.inject.Inject;
 import lombok.SneakyThrows;
+import skill.entity.DifficultyLevel;
+import skill.entity.Skill;
+import skill.service.SkillService;
 import user.entity.User;
 import user.service.UserService;
 
-import java.io.InputStream;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.UUID;
 
 @ApplicationScoped
@@ -23,6 +24,8 @@ public class InitializedData {
      */
     private final UserService userService;
 
+    private final SkillService skillService;
+
 
     /**
      * The CDI container provides a built-in instance of {@link RequestContextController} that is dependent scoped for
@@ -32,14 +35,16 @@ public class InitializedData {
 
     /**
      * @param userService              user service
+     * @param skillService
      * @param requestContextController CDI request context controller
      */
     @Inject
     public InitializedData(
             UserService userService,
-            RequestContextController requestContextController
+            SkillService skillService, RequestContextController requestContextController
     ) {
         this.userService = userService;
+        this.skillService = skillService;
         this.requestContextController = requestContextController;
     }
 
@@ -103,6 +108,40 @@ public class InitializedData {
         userService.create(user2);
         userService.create(user3);
         userService.create(user4);
+
+        Skill skill1 = Skill.builder()
+                .id(UUID.fromString("87654321-AAAA-AAAA-AAAA-CBA987654321"))
+                .name("Running")
+                .level(DifficultyLevel.EASY)
+                .description("Running so cool")
+                .tags(null)
+                .favouriteRank(20)
+                .tutorial(null)
+                .build();
+
+        Skill skill2 = Skill.builder()
+                .id(UUID.fromString("87654321-BBBB-BBBB-BBBB-CBA987654321"))
+                .name("Roller skating")
+                .level(DifficultyLevel.HARD)
+                .description("Cooler than ice skating")
+                .tags(null)
+                .favouriteRank(30)
+                .tutorial(null)
+                .build();
+
+        Skill skill3 = Skill.builder()
+                .id(UUID.fromString("87654321-CCCC-CCCC-CCCC-CBA987654321"))
+                .name("Drawing")
+                .level(DifficultyLevel.MEDIUM)
+                .description("Use your imagination freely")
+                .tags(null)
+                .favouriteRank(50)
+                .tutorial(null)
+                .build();
+
+        skillService.create(skill1);
+        skillService.create(skill2);
+        skillService.create(skill3);
 
         requestContextController.deactivate();
     }

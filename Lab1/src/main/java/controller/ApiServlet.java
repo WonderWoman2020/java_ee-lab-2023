@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import skill.controller.api.SkillController;
+import tutorial.controller.api.TutorialController;
 import user.controller.api.UserController;
 
 import java.io.IOException;
@@ -33,6 +34,8 @@ public class ApiServlet extends HttpServlet {
     private UserController userController;
 
     private SkillController skillController;
+
+    private TutorialController tutorialController;
 
     /**
      * Definition of paths supported by this servlet. Separate inner class provides composition for static fields.
@@ -94,10 +97,11 @@ public class ApiServlet extends HttpServlet {
      * Only here to hack the fact, that servlets do not have doPatch() method to override
      */
     @Inject
-    public ApiServlet(UserController userController, SkillController skillController)
+    public ApiServlet(UserController userController, SkillController skillController, TutorialController tutorialController)
     {
         this.userController = userController;
         this.skillController = skillController;
+        this.tutorialController = tutorialController;
     }
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -142,6 +146,10 @@ public class ApiServlet extends HttpServlet {
             } else if (path.matches(Patterns.SKILLS.pattern())) {
                 response.setContentType("application/json");
                 response.getWriter().write(jsonb.toJson(skillController.getSkills()));
+                return;
+            } else if (path.matches(Patterns.TUTORIALS.pattern())) {
+                response.setContentType("application/json");
+                response.getWriter().write(jsonb.toJson(tutorialController.getTutorials()));
                 return;
             }
 

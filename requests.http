@@ -46,3 +46,9 @@ GET http://localhost:8080/Lab1/api/skills
 GET http://localhost:8080/Lab1/api/tutorials
 
 ###
+
+# Get single tutorial
+
+GET http://localhost:8080/Lab1/api/tutorials/12345678-cccc-cccc-cccc-123456789abc
+
+###

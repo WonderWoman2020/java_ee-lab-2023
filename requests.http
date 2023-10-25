@@ -34,3 +34,15 @@ GET http://localhost:8080/Lab1/api/users/12345678-BBBB-BBBB-BBBB-123456789ABC/av
 DELETE http://localhost:8080/Lab1/api/users/12345678-bbbb-bbbb-bbbb-123456789abc/avatar
 
 ###
+
+# Get all skills
+
+GET http://localhost:8080/Lab1/api/skills
+
+###
+
+# Get all tutorials
+
+GET http://localhost:8080/Lab1/api/tutorials
+
+###

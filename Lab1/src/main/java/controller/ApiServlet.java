@@ -151,6 +151,11 @@ public class ApiServlet extends HttpServlet {
                 response.setContentType("application/json");
                 response.getWriter().write(jsonb.toJson(tutorialController.getTutorials()));
                 return;
+            }else if (path.matches(Patterns.TUTORIAL.pattern())) {
+                response.setContentType("application/json");
+                UUID uuid = extractUuid(Patterns.TUTORIAL, path);
+                response.getWriter().write(jsonb.toJson(tutorialController.getTutorial(uuid)));
+                return;
             }
 
         }

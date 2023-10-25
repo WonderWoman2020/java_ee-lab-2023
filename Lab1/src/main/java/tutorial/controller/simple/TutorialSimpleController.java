@@ -1,11 +1,17 @@
 package tutorial.controller.simple;
 
+import controller.exception.NotFoundException;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import tutorial.controller.api.TutorialController;
+import tutorial.dto.GetTutorialResponse;
 import tutorial.dto.GetTutorialsResponse;
+import tutorial.dto.function.TutorialToResponseFunction;
 import tutorial.dto.function.TutorialsToResponseFunction;
 import tutorial.service.TutorialService;
+import user.dto.function.UserToResponseFunction;
+
+import java.util.UUID;
 
 @RequestScoped
 public class TutorialSimpleController implements TutorialController {
@@ -20,5 +26,11 @@ public class TutorialSimpleController implements TutorialController {
     @Override
     public GetTutorialsResponse getTutorials() {
         return new TutorialsToResponseFunction().apply(service.findAll());
+    }
+
+    @Override
+    public GetTutorialResponse getTutorial(UUID uuid) {
+        return service.find(uuid).map(new TutorialToResponseFunction())
+                .orElseThrow(NotFoundException::new);
     }
 }

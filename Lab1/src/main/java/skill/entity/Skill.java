@@ -1,5 +1,7 @@
 package skill.entity;
 
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 import tutorial.entity.Tutorial;
 
 import java.io.Serializable;
@@ -7,6 +9,13 @@ import java.util.List;
 import java.util.UUID;
 
 
+@Getter
+@Setter
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@ToString()
+@EqualsAndHashCode()
 public class Skill implements Serializable {
 
     private UUID id;

@@ -5,6 +5,7 @@ import jakarta.inject.Inject;
 import lombok.NoArgsConstructor;
 import lombok.extern.java.Log;
 import serialization.component.CloningUtility;
+import skill.entity.Skill;
 import user.entity.User;
 
 import java.util.HashSet;
@@ -21,6 +22,8 @@ public class DataStore {
      * Set of all users.
      */
     private final Set<User> users = new HashSet<>();
+
+    private final Set<Skill> skills = new HashSet<>();
 
     /**
      * Component used for creating deep copies.
@@ -82,6 +85,28 @@ public class DataStore {
             users.add(cloningUtility.clone(value));
         } else {
             throw new IllegalArgumentException("The user with id \"%s\" does not exist".formatted(value.getId()));
+        }
+    }
+
+
+    public synchronized List<Skill> findAllSkills() {
+        return skills.stream()
+                .map(cloningUtility::clone)
+                .collect(Collectors.toList());
+    }
+
+    public synchronized void createSkill(Skill value) throws IllegalArgumentException {
+        if (skills.stream().anyMatch(character -> character.getId().equals(value.getId()))) {
+            throw new IllegalArgumentException("The skill id \"%s\" is not unique".formatted(value.getId()));
+        }
+        skills.add(cloningUtility.clone(value));
+    }
+
+    public synchronized void updateSkill(Skill value) throws IllegalArgumentException {
+        if (skills.removeIf(character -> character.getId().equals(value.getId()))) {
+            skills.add(cloningUtility.clone(value));
+        } else {
+            throw new IllegalArgumentException("The skill with id \"%s\" does not exist".formatted(value.getId()));
         }
     }
 }

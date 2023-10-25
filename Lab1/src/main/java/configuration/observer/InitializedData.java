@@ -9,6 +9,8 @@ import lombok.SneakyThrows;
 import skill.entity.DifficultyLevel;
 import skill.entity.Skill;
 import skill.service.SkillService;
+import tutorial.entity.Tutorial;
+import tutorial.service.TutorialService;
 import user.entity.User;
 import user.service.UserService;
 
@@ -26,6 +28,8 @@ public class InitializedData {
 
     private final SkillService skillService;
 
+    private final TutorialService tutorialService;
+
 
     /**
      * The CDI container provides a built-in instance of {@link RequestContextController} that is dependent scoped for
@@ -36,15 +40,17 @@ public class InitializedData {
     /**
      * @param userService              user service
      * @param skillService
+     * @param tutorialService
      * @param requestContextController CDI request context controller
      */
     @Inject
     public InitializedData(
             UserService userService,
-            SkillService skillService, RequestContextController requestContextController
+            SkillService skillService, TutorialService tutorialService, RequestContextController requestContextController
     ) {
         this.userService = userService;
         this.skillService = skillService;
+        this.tutorialService = tutorialService;
         this.requestContextController = requestContextController;
     }
 
@@ -142,6 +148,37 @@ public class InitializedData {
         skillService.create(skill1);
         skillService.create(skill2);
         skillService.create(skill3);
+
+        Tutorial tutorial1 = Tutorial.builder()
+                .id(UUID.fromString( "12345678-AAAA-AAAA-AAAA-123456789ABC"))
+                .title("How to master skate jumps")
+                .author(user1)
+                .skill(skill2)
+                .description("You have to do...")
+                .duration(12)
+                .build();
+
+        Tutorial tutorial2 = Tutorial.builder()
+                .id(UUID.fromString( "12345678-BBBB-BBBB-BBBB-123456789ABC"))
+                .title("How to catch balance")
+                .author(user2)
+                .skill(skill2)
+                .description("Don't start from...")
+                .duration(6)
+                .build();
+
+        Tutorial tutorial3 = Tutorial.builder()
+                .id(UUID.fromString( "12345678-CCCC-CCCC-CCCC-123456789ABC"))
+                .title("What you shouldn't do while running")
+                .author(user3)
+                .skill(skill1)
+                .description("Let's start with basics...")
+                .duration(3)
+                .build();
+
+        tutorialService.create(tutorial1);
+        tutorialService.create(tutorial2);
+        tutorialService.create(tutorial3);
 
         requestContextController.deactivate();
     }

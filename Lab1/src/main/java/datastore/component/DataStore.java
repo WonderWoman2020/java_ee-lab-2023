@@ -6,11 +6,13 @@ import lombok.NoArgsConstructor;
 import lombok.extern.java.Log;
 import serialization.component.CloningUtility;
 import skill.entity.Skill;
+import tutorial.entity.Tutorial;
 import user.entity.User;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Log
@@ -24,6 +26,8 @@ public class DataStore {
     private final Set<User> users = new HashSet<>();
 
     private final Set<Skill> skills = new HashSet<>();
+
+    private final Set<Tutorial> tutorials = new HashSet<>();
 
     /**
      * Component used for creating deep copies.
@@ -108,5 +112,54 @@ public class DataStore {
         } else {
             throw new IllegalArgumentException("The skill with id \"%s\" does not exist".formatted(value.getId()));
         }
+    }
+
+    public synchronized List<Tutorial> findAllTutorials() {
+        return tutorials.stream()
+                .map(cloningUtility::clone)
+                .collect(Collectors.toList());
+    }
+
+
+    public synchronized void createTutorial(Tutorial value) throws IllegalArgumentException {
+        if (tutorials.stream().anyMatch(tutorial -> tutorial.getId().equals(value.getId()))) {
+            throw new IllegalArgumentException("The tutorial id \"%s\" is not unique".formatted(value.getId()));
+        }
+        Tutorial entity = cloneWithRelationships(value);
+        tutorials.add(entity);
+    }
+
+    public synchronized void updateTutorial(Tutorial value) throws IllegalArgumentException {
+        Tutorial entity = cloneWithRelationships(value);
+        if (tutorials.removeIf(tutorial -> tutorial.getId().equals(value.getId()))) {
+            tutorials.add(entity);
+        } else {
+            throw new IllegalArgumentException("The tutorial with id \"%s\" does not exist".formatted(value.getId()));
+        }
+    }
+    public synchronized void deleteTutorial(UUID id) throws IllegalArgumentException {
+        if (!tutorials.removeIf(tutorial -> tutorial.getId().equals(id))) {
+            throw new IllegalArgumentException("The tutorial with id \"%s\" does not exist".formatted(id));
+        }
+    }
+
+    private Tutorial cloneWithRelationships(Tutorial value) {
+        Tutorial entity = cloningUtility.clone(value);
+
+        if (entity.getAuthor() != null) {
+            entity.setAuthor(users.stream()
+                    .filter(user -> user.getId().equals(value.getAuthor().getId()))
+                    .findFirst()
+                    .orElseThrow(() -> new IllegalArgumentException("No user with id \"%s\".".formatted(value.getAuthor().getId()))));
+        }
+
+        if (entity.getSkill() != null) {
+            entity.setSkill(skills.stream()
+                    .filter(profession -> profession.getId().equals(value.getSkill().getId()))
+                    .findFirst()
+                    .orElseThrow(() -> new IllegalArgumentException("No skill with id \"%s\".".formatted(value.getSkill().getId()))));
+        }
+
+        return entity;
     }
 }

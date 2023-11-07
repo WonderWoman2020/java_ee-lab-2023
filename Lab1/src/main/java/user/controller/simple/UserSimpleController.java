@@ -2,9 +2,12 @@ package user.controller.simple;
 
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
+import skill.dto.function.RequestToSkillFunction;
 import user.controller.api.UserController;
 import user.dto.GetUserResponse;
 import user.dto.GetUsersResponse;
+import user.dto.PutUserRequest;
+import user.dto.function.RequestToUserFunction;
 import user.dto.function.UserToResponseFunction;
 import user.dto.function.UsersToResponseFunction;
 
@@ -32,6 +35,25 @@ public class UserSimpleController implements UserController {
     public GetUserResponse getUser(UUID uuid) {
         return service.find(uuid).map(new UserToResponseFunction())
                 .orElseThrow(NotFoundException::new);
+    }
+
+    @Override
+    public void deleteUser(UUID id) {
+        service.find(id).ifPresentOrElse(
+                entity -> service.delete(entity),
+                () -> {
+                    throw new NotFoundException();
+                }
+        );
+    }
+
+    @Override
+    public void putUser(UUID id, PutUserRequest request) {
+        try {
+            service.create(new RequestToUserFunction().apply(id, request));
+        } catch (IllegalArgumentException ex) {
+            throw new BadRequestException(ex);
+        }
     }
 
     @Override

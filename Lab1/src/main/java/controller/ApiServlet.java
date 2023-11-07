@@ -10,8 +10,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import skill.controller.api.SkillController;
+import skill.dto.PutSkillRequest;
 import tutorial.controller.api.TutorialController;
 import user.controller.api.UserController;
+import user.dto.PutUserRequest;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -70,6 +72,8 @@ public class ApiServlet extends HttpServlet {
          * Skill related patterns (the category class)
          */
         public static final Pattern SKILLS = Pattern.compile("/skills/?");
+
+        public static final Pattern SKILL = Pattern.compile("/skills/(%s)".formatted(UUID.pattern()));
 
         public static final Pattern SKILL_TUTORIALS = Pattern.compile("/skills/(%s)/tutorials/?");
 
@@ -147,11 +151,16 @@ public class ApiServlet extends HttpServlet {
                 response.setContentType("application/json");
                 response.getWriter().write(jsonb.toJson(skillController.getSkills()));
                 return;
+            } else if (path.matches(Patterns.SKILL.pattern())) {
+                response.setContentType("application/json");
+                UUID uuid = extractUuid(Patterns.SKILL, path);
+                response.getWriter().write(jsonb.toJson(skillController.getSkill(uuid)));
+                return;
             } else if (path.matches(Patterns.TUTORIALS.pattern())) {
                 response.setContentType("application/json");
                 response.getWriter().write(jsonb.toJson(tutorialController.getTutorials()));
                 return;
-            }else if (path.matches(Patterns.TUTORIAL.pattern())) {
+            } else if (path.matches(Patterns.TUTORIAL.pattern())) {
                 response.setContentType("application/json");
                 UUID uuid = extractUuid(Patterns.TUTORIAL, path);
                 response.getWriter().write(jsonb.toJson(tutorialController.getTutorial(uuid)));
@@ -176,6 +185,16 @@ public class ApiServlet extends HttpServlet {
                 UUID uuid = extractUuid(Patterns.USER_AVATAR, path);
                 userController.putUserAvatar(uuid, request.getPart("portrait").getInputStream());
                 return;
+            } else if (path.matches(Patterns.SKILL.pattern())) {
+                UUID uuid = extractUuid(Patterns.SKILL, path);
+                skillController.putSkill(uuid, jsonb.fromJson(request.getReader(), PutSkillRequest.class));
+                response.addHeader("Location", createUrl(request, Paths.API, "skills", uuid.toString()));
+                return;
+            } else if (path.matches(Patterns.USER.pattern())) {
+                UUID uuid = extractUuid(Patterns.USER, path);
+                userController.putUser(uuid, jsonb.fromJson(request.getReader(), PutUserRequest.class));
+                response.addHeader("Location", createUrl(request, Paths.API, "users", uuid.toString()));
+                return;
             }
         }
         response.sendError(HttpServletResponse.SC_BAD_REQUEST);
@@ -190,6 +209,18 @@ public class ApiServlet extends HttpServlet {
             if (path.matches(Patterns.USER_AVATAR.pattern())){
                 UUID uuid = extractUuid(Patterns.USER_AVATAR, path);
                 userController.deleteUserAvatar(uuid);
+                return;
+            } else if (path.matches(Patterns.USER.pattern())){
+                UUID uuid = extractUuid(Patterns.USER, path);
+                userController.deleteUser(uuid);
+                return;
+            } else if (path.matches(Patterns.SKILL.pattern())){
+                UUID uuid = extractUuid(Patterns.SKILL, path);
+                skillController.deleteSkill(uuid);
+                return;
+            } else if (path.matches(Patterns.TUTORIAL.pattern())){
+                UUID uuid = extractUuid(Patterns.TUTORIAL, path);
+                tutorialController.deleteTutorial(uuid);
                 return;
             }
         }

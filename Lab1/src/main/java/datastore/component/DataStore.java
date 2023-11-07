@@ -92,6 +92,11 @@ public class DataStore {
         }
     }
 
+    public synchronized void deleteUser(UUID id) throws IllegalArgumentException {
+        if (!users.removeIf(user -> user.getId().equals(id))) {
+            throw new IllegalArgumentException("The user with id \"%s\" does not exist".formatted(id));
+        }
+    }
 
     public synchronized List<Skill> findAllSkills() {
         return skills.stream()
@@ -111,6 +116,12 @@ public class DataStore {
             skills.add(cloningUtility.clone(value));
         } else {
             throw new IllegalArgumentException("The skill with id \"%s\" does not exist".formatted(value.getId()));
+        }
+    }
+
+    public synchronized void deleteSkill(UUID id) throws IllegalArgumentException {
+        if (!skills.removeIf(skill -> skill.getId().equals(id))) {
+            throw new IllegalArgumentException("The skill with id \"%s\" does not exist".formatted(id));
         }
     }
 

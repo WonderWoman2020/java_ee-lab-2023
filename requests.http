@@ -10,6 +10,26 @@ GET http://localhost:8080/Lab1/api/users/12345678-BBBB-BBBB-BBBB-123456789ABC
 
 ###
 
+# Create new user
+
+PUT http://localhost:8080/Lab1/api/users/12345678-FFFF-FFFF-FFFF-123456789ABC
+Content-Type: application/json
+
+{
+  "birthDate": "2023-10-25",
+  "nick": "I'm new here!",
+  "reputation": 10,
+  "roles": []
+}
+
+###
+
+# Delete single user
+
+DELETE http://localhost:8080/Lab1/api/users/12345678-BBBB-BBBB-BBBB-123456789ABC
+
+###
+
 # Create user avatar.
 
 PUT http://localhost:8080/Lab1/api/users/12345678-BBBB-BBBB-BBBB-123456789ABC/avatar
@@ -18,7 +38,7 @@ Content-Type: multipart/form-data; boundary=boundary
 --boundary
 Content-Disposition: form-data; name="portrait"; filename="sigrid.png'
 
-< Lab1/src/main/resources/configuration/avatar/sigrid.png
+< sigrid.png
 --boundary--
 
 ###
@@ -41,6 +61,33 @@ GET http://localhost:8080/Lab1/api/skills
 
 ###
 
+# Get single skill
+
+GET http://localhost:8080/Lab1/api/skills/87654321-BBBB-BBBB-BBBB-CBA987654321
+
+###
+
+# Create new skill
+
+PUT http://localhost:8080/Lab1/api/skills/87654321-FFFF-FFFF-FFFF-CBA987654321
+Content-Type: application/json
+
+{
+  "description": "Fun and creative activity",
+  "favouriteRank": 40,
+  "level": "MEDIUM",
+  "name": "Dancing",
+  "tags": []
+}
+
+###
+
+# Delete single skill
+
+DELETE http://localhost:8080/Lab1/api/skills/87654321-AAAA-AAAA-AAAA-CBA987654321
+
+###
+
 # Get all tutorials
 
 GET http://localhost:8080/Lab1/api/tutorials
@@ -50,5 +97,11 @@ GET http://localhost:8080/Lab1/api/tutorials
 # Get single tutorial
 
 GET http://localhost:8080/Lab1/api/tutorials/12345678-cccc-cccc-cccc-123456789abc
+
+###
+
+# Delete single tutorial
+
+DELETE http://localhost:8080/Lab1/api/tutorials/12345678-cccc-cccc-cccc-123456789abc
 
 ###

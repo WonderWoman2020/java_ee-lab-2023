@@ -43,6 +43,6 @@ public class SkillInMemoryRepository implements SkillRepository {
 
     @Override
     public void delete(Skill entity) {
-        throw new UnsupportedOperationException("Operation not implemented.");
+        store.deleteSkill(entity.getId());
     }
 }

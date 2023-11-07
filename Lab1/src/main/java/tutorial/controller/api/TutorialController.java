@@ -10,4 +10,6 @@ public interface TutorialController {
     GetTutorialsResponse getTutorials();
 
     GetTutorialResponse getTutorial(UUID uuid);
+
+    void deleteTutorial(UUID id);
 }

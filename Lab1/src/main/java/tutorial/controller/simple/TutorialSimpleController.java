@@ -33,4 +33,14 @@ public class TutorialSimpleController implements TutorialController {
         return service.find(uuid).map(new TutorialToResponseFunction())
                 .orElseThrow(NotFoundException::new);
     }
+
+    @Override
+    public void deleteTutorial(UUID id) {
+        service.find(id).ifPresentOrElse(
+                entity -> service.delete(entity),
+                () -> {
+                    throw new NotFoundException();
+                }
+        );
+    }
 }

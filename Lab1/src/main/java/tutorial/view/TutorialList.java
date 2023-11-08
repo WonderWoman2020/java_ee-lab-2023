@@ -93,7 +93,7 @@ public class TutorialList {
      */
     public String deleteAction(TutorialsModel.Tutorial tutorial) {
         service.delete(tutorial.getId());
-        return "tutorial_list?faces-redirect=true";
+        return "skill_view?faces-redirect=true";
     }
 
 }

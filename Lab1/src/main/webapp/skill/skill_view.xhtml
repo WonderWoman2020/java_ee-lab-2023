@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:f="jakarta.faces.core"
+                template="/WEB-INF/template/main.xhtml">
+
+    <f:metadata>
+        <f:viewParam name="id" value="#{skillView.id}" required="true"/>
+        <f:viewAction action="#{skillView.init()}"/>
+    </f:metadata>
+
+    <ui:define name="content">
+        <article>
+            <header><h2><h:outputText value="#{skillView.skill.name}"/></h2></header>
+            <div class="container">
+                <div class="row">
+                    <div class="col-4">
+                        <!--<div class="row mb-2">
+                            <div class="col-6">
+                                Level &amp; Profession
+                            </div>
+                            <div class="col-6">
+                                <h:outputText value="#{skillView.character.profession}"/>
+                                level
+                                <h:outputText value="#{characterView.character.level}"/>
+                            </div>
+                        </div>-->
+
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                Description
+                            </div>
+                            <div class="col-6">
+                                <h:outputText value="#{skillView.skill.description}"/>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                Difficulty level
+                            </div>
+                            <div class="col-6">
+                                <h:outputText value="#{skillView.skill.level}"/>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                Favourite rank
+                            </div>
+                            <div class="col-6">
+                                <h:outputText value="#{skillView.skill.favouriteRank}"/>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                Tags
+                            </div>
+                            <div class="col-6">
+                                <h:outputText value="#{skillView.skill.tags}"/>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </article>
+    </ui:define>
+
+</ui:composition>

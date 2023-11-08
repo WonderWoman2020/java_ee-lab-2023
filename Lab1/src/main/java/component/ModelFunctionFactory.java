@@ -1,6 +1,7 @@
 package component;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import skill.model.function.SkillToModelFunction;
 import skill.model.function.SkillsToModelFunction;
 
 import java.util.function.Function;
@@ -15,5 +16,7 @@ public class ModelFunctionFactory {
     public SkillsToModelFunction skillsToModel() {
         return new SkillsToModelFunction();
     }
+
+    public SkillToModelFunction skillToModel() {return new SkillToModelFunction();}
 
 }

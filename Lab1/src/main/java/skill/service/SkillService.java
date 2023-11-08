@@ -42,9 +42,9 @@ public class SkillService {
     {
         repository.update(skill);
     }
-    public void delete(Skill skill)
+    public void delete(UUID id)
     {
-        repository.delete(skill);
+        repository.delete(repository.find(id).orElseThrow());
     }
 
 }

@@ -5,6 +5,7 @@
         <feature>servlet-6.0</feature>
         <feature>jsonb-3.0</feature>
         <feature>cdi-4.0</feature>
+        <feature>faces-4.0</feature>
     </featureManager>
     <!-- Tag to change the default http port if it's taken on the host by some other process -->
     <httpEndpoint id="defaultHttpEndpoint"

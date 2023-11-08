@@ -37,7 +37,7 @@ public class TutorialSimpleController implements TutorialController {
     @Override
     public void deleteTutorial(UUID id) {
         service.find(id).ifPresentOrElse(
-                entity -> service.delete(entity),
+                entity -> service.delete(entity.getId()),
                 () -> {
                     throw new NotFoundException();
                 }

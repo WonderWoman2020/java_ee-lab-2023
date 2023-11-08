@@ -43,9 +43,9 @@ public class TutorialService {
     {
         repository.update(tutorial);
     }
-    public void delete(Tutorial tutorial)
+    public void delete(UUID id)
     {
-        repository.delete(tutorial);
+        repository.delete(repository.find(id).orElseThrow());
     }
 
     public Optional<List<Tutorial>> findAllBySkill(UUID id) {

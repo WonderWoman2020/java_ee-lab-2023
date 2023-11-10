@@ -11,6 +11,8 @@ import lombok.Setter;
 import skill.entity.Skill;
 import skill.model.SkillModel;
 import skill.service.SkillService;
+import tutorial.model.TutorialsModel;
+import tutorial.service.TutorialService;
 
 
 import java.io.IOException;
@@ -49,14 +51,23 @@ public class SkillView implements Serializable {
     private SkillModel skill;
 
 
+    private final TutorialService tutorialService;
+
+    /**
+     * Characters list exposed to the view.
+     */
+    private TutorialsModel tutorials;
+
+
     /**
      * @param service service for managing characters
      * @param factory factory producing functions for conversion between models and entities
      */
     @Inject
-    public SkillView(SkillService service, ModelFunctionFactory factory) {
+    public SkillView(SkillService service, ModelFunctionFactory factory, TutorialService tutorialService) {
         this.service = service;
         this.factory = factory;
+        this.tutorialService = tutorialService;
     }
 
     /**
@@ -70,6 +81,20 @@ public class SkillView implements Serializable {
         } else {
             FacesContext.getCurrentInstance().getExternalContext().responseSendError(HttpServletResponse.SC_NOT_FOUND, "Skill not found");
         }
+        //getTutorials();
+    }
+
+    public TutorialsModel getTutorials() {
+        if (tutorials == null) {
+            tutorials = factory.tutorialsToModel().apply(tutorialService.findAllBySkill(id).orElseThrow());
+        }
+        return tutorials;
+    }
+
+    public String deleteAction(TutorialsModel.Tutorial tutorial) {
+        tutorialService.delete(tutorial.getId());
+        //String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
+        return "skill_view?id="+id+"&faces-redirect=true";
     }
 
 }

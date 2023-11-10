@@ -5,10 +5,12 @@ import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import skill.entity.Skill;
 import skill.repository.api.SkillRepository;
+import tutorial.entity.Tutorial;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RequestScoped
 public class SkillInMemoryRepository implements SkillRepository {
@@ -44,5 +46,10 @@ public class SkillInMemoryRepository implements SkillRepository {
     @Override
     public void delete(Skill entity) {
         store.deleteSkill(entity.getId());
+        List<Tutorial> tutorials = store.findAllTutorials().stream()
+                .filter(tutorial -> entity.equals(tutorial.getSkill()))
+                .collect(Collectors.toList());
+        for(int i=0; i<tutorials.size(); i++)
+            store.deleteTutorial(tutorials.get(i).getId());
     }
 }

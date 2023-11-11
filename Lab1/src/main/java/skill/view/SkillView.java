@@ -21,14 +21,14 @@ import java.util.Optional;
 import java.util.UUID;
 
 /**
- * View bean for rendering single character information.
+ * View bean for rendering single skill information.
  */
 @ViewScoped
 @Named
 public class SkillView implements Serializable {
 
     /**
-     * Service for managing characters.
+     * Service for managing skills
      */
     private final SkillService service;
 
@@ -38,29 +38,31 @@ public class SkillView implements Serializable {
     private final ModelFunctionFactory factory;
 
     /**
-     * Character id.
+     * Skill id.
      */
     @Setter
     @Getter
     private UUID id;
 
     /**
-     * Character exposed to the view.
+     * Skill exposed to the view.
      */
     @Getter
     private SkillModel skill;
 
-
+    /**
+     * Service for managing tutorials
+     */
     private final TutorialService tutorialService;
 
     /**
-     * Characters list exposed to the view.
+     * Tutorials list exposed to the view.
      */
     private TutorialsModel tutorials;
 
 
     /**
-     * @param service service for managing characters
+     * @param service service for managing skills
      * @param factory factory producing functions for conversion between models and entities
      */
     @Inject
@@ -81,7 +83,6 @@ public class SkillView implements Serializable {
         } else {
             FacesContext.getCurrentInstance().getExternalContext().responseSendError(HttpServletResponse.SC_NOT_FOUND, "Skill not found");
         }
-        //getTutorials();
     }
 
     public TutorialsModel getTutorials() {

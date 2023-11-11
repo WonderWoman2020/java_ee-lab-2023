@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * JSF view model class in order to not use entity classes. Represents single character to be displayed.
+ * JSF view model class in order to not use entity classes. Represents single skill to be displayed.
  */
 @Getter
 @Setter

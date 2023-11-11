@@ -9,19 +9,19 @@ import component.ModelFunctionFactory;
 
 
 /**
- * View bean for rendering list of characters.
+ * View bean for rendering list of skills.
  */
 @RequestScoped
 @Named
 public class SkillList {
 
     /**
-     * Service for managing characters.
+     * Service for managing skills.
      */
     private final SkillService service;
 
     /**
-     * Characters list exposed to the view.
+     * Skills list exposed to the view.
      */
     private SkillsModel skills;
 
@@ -31,7 +31,7 @@ public class SkillList {
     private final ModelFunctionFactory factory;
 
     /**
-     * @param service character service
+     * @param service skills service
      * @param factory factory producing functions for conversion between models and entities
      */
     @Inject
@@ -44,7 +44,7 @@ public class SkillList {
      * In order to prevent calling service on different steps of JSF request lifecycle, model property is cached using
      * lazy getter.
      *
-     * @return all characters
+     * @return all skills
      */
     public SkillsModel getSkills() {
         if (skills == null) {
@@ -56,8 +56,8 @@ public class SkillList {
     /**
      * Action for clicking delete action.
      *
-     * @param skill character to be removed
-     * @return navigation case to list_characters
+     * @param skill to be removed
+     * @return navigation case to skill_list
      */
     public String deleteAction(SkillsModel.Skill skill) {
         service.delete(skill.getId());

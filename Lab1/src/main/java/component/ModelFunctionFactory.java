@@ -3,9 +3,7 @@ package component;
 import jakarta.enterprise.context.ApplicationScoped;
 import skill.model.function.SkillToModelFunction;
 import skill.model.function.SkillsToModelFunction;
-import tutorial.model.function.ModelToTutorialFunction;
-import tutorial.model.function.TutorialToModelFunction;
-import tutorial.model.function.TutorialsToModelFunction;
+import tutorial.model.function.*;
 
 import java.util.function.Function;
 
@@ -29,5 +27,9 @@ public class ModelFunctionFactory {
     public TutorialToModelFunction tutorialToModel() {return new TutorialToModelFunction();}
 
     public ModelToTutorialFunction modelToTutorial() {return new ModelToTutorialFunction();}
+
+    public UpdateTutorialWithModelFunction updateTutorial() {return new UpdateTutorialWithModelFunction();}
+
+    public TutorialToEditModelFunction tutorialToEditModel() {return new TutorialToEditModelFunction();}
 
 }

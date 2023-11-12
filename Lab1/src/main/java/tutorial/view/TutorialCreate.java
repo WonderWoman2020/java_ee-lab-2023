@@ -91,8 +91,12 @@ public class TutorialCreate implements Serializable {
     }
 
     public String saveAction() {
+        // Prevent saving without choosing a Skill (foreign keys should be set)
+        if(tutorial.getSkill() == null)
+            return null;
         tutorialService.create(factory.modelToTutorial().apply(tutorial));
-        return "/skill/skill_list.xhtml?faces-redirect=true";
+        //return "/skill/skill_list.xhtml?faces-redirect=true";
+        return "/skill/skill_view?id="+tutorial.getSkill().getId()+"&faces-redirect=true";
     }
 
 }

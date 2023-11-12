@@ -88,7 +88,8 @@ public class TutorialEdit implements Serializable {
 
     public String saveAction() {
         service.update(factory.updateTutorial().apply(service.find(id).orElseThrow(), tutorial));
-        return "/skill/skill_list.xhtml?faces-redirect=true";
+        //return "/skill/skill_list.xhtml?faces-redirect=true";
+        return "tutorial_view?id="+id+"&faces-redirect=true";
     }
 
 }

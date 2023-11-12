@@ -50,6 +50,10 @@ public class TutorialView implements Serializable {
     @Getter
     private TutorialModel tutorial;
 
+    @Setter
+    @Getter
+    private UUID skillId;
+
 
     /**
      * @param service service for managing skills
@@ -68,6 +72,9 @@ public class TutorialView implements Serializable {
     public void init() throws IOException {
         Optional<Tutorial> tutorial = service.find(id);
         if (tutorial.isPresent()) {
+            if(tutorial.get().getSkill() != null)
+                skillId = tutorial.get().getSkill().getId();
+            //skillId = null;
             this.tutorial = factory.tutorialToModel().apply(tutorial.get());
         } else {
             FacesContext.getCurrentInstance().getExternalContext().responseSendError(HttpServletResponse.SC_NOT_FOUND, "Tutorial not found");

@@ -31,7 +31,9 @@
                                 Skill
                             </div>
                             <div class="col-6">
-                                <h:outputText value="#{tutorialView.tutorial.skill}"/>
+                                <!--<h:outputText value="#{tutorialView.tutorial.skill}"/>-->
+                                <h:link styleClass="nav-link" outcome="/skill/skill_view.xhtml?id=#{tutorialView.skillId}"
+                                        value="#{tutorialView.tutorial.skill}"/>
                             </div>
                         </div>
 

@@ -12,7 +12,7 @@ public class TutorialToModelFunction implements Function<Tutorial, TutorialModel
     @Override
     public TutorialModel apply(Tutorial entity) {
         return TutorialModel.builder()
-                .author(entity.getAuthor().getNick())
+                .author(entity.getAuthor() == null ? null : entity.getAuthor().getNick())
                 .skill(entity.getSkill().getName())
                 .title(entity.getTitle())
                 .description(entity.getDescription())

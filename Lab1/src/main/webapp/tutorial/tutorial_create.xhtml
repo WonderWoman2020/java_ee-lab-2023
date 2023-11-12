@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:f="jakarta.faces.core"
+                template="/WEB-INF/template/main.xhtml">
+
+    <f:metadata>
+        <f:viewAction action="#{tutorialCreate.init()}"/>
+    </f:metadata>
+
+    <ui:define name="content">
+        <article>
+            <header><h2>Create tutorial in one step</h2></header>
+            <h:form styleClass="container" onreset="onReset()" enctype="multipart/form-data">
+
+                <div class="row">
+                    <div class="col-4 p-2">
+                        <div class="form-outline">
+                            <h:inputText id="title" value="#{tutorialCreate.tutorial.title}" styleClass="form-control"/>
+                            <h:outputLabel for="title" value="Title:" styleClass="form-label"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-4 p-2">
+                        <div class="form-outline">
+                            <h:inputText id="duration" value="#{tutorialCreate.tutorial.duration}" styleClass="form-control"/>
+                            <h:outputLabel for="duration" value="Duration:" styleClass="form-label"/>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-4 p-2">
+                        <fieldset>
+                            <legend class="form-label fs-6">Skill:</legend>
+                            <!-- Instead of ui:repeat the h:selectOneRadio with f:selectItems can be used but then
+                            Faces renders table or list and custom styling with CSS libraties can be troublesome. -->
+                            <ui:repeat value="#{tutorialCreate.skills}" var="skill">
+                                <div class="form-check">
+                                    <h:selectOneRadio id="radioId" group="skil"
+                                                      value="#{tutorialCreate.tutorial.skill}"
+                                                      styleClass="form-check-input"
+                                                      enabledClass="form-check-label">
+                                        <f:selectItem itemValue="#{skill}" itemLabel="#{skill.name}"/>
+                                    </h:selectOneRadio>
+                                </div>
+                            </ui:repeat>
+                        </fieldset>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-4 p-2">
+                        <div class="form-outline">
+                            <h:inputTextarea id="description" value="#{tutorialCreate.tutorial.description}"
+                                             styleClass="form-control" rows="4"/>
+                            <h:outputLabel for="description" value="Description:" styleClass="form-label"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-2 p-2 text-center">
+                        <h:commandButton styleClass="btn btn-primary" value="Create"
+                                         action="#{tutorialCreate.saveAction()}"/>
+                    </div>
+                    <div class="col-2 p-2 text-center">
+                        <h:commandButton styleClass="btn btn-secondary" value="Cancel"
+                                         action="#{tutorialCreate.cancelAction()}"/>
+                    </div>
+                </div>
+            </h:form>
+        </article>
+    </ui:define>
+
+</ui:composition>

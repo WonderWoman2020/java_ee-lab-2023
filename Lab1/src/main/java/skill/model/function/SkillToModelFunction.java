@@ -12,6 +12,7 @@ public class SkillToModelFunction implements Function<Skill, SkillModel>, Serial
     @Override
     public SkillModel apply(Skill entity) {
         return SkillModel.builder()
+                .id(entity.getId())
                 .name(entity.getName())
                 .description(entity.getDescription())
                 .tags(entity.getTags())

@@ -18,6 +18,8 @@ import java.util.UUID;
 @EqualsAndHashCode
 public class SkillModel {
 
+    private UUID id;
+
     private String name;
     private String description;
     private DifficultyLevel level;

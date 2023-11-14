@@ -1,7 +1,9 @@
 package skill.controller.rest;
 
-import controller.exception.BadRequestException;
-import controller.exception.NotFoundException;
+//import controller.exception.BadRequestException;
+//import controller.exception.NotFoundException;
+import jakarta.ws.rs.NotFoundException;
+import jakarta.ws.rs.BadRequestException;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.Default;
 import jakarta.inject.Inject;

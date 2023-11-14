@@ -47,7 +47,7 @@ public class ApiServlet extends HttpServlet {
         /**
          * All API operations. Version v1 will be used to distinguish from other implementations.
          */
-        public static final String API = "/api";
+        public static final String API = "/api/v1";
 
     }
 

@@ -58,4 +58,11 @@ public class TutorialService {
                 .map(repository::findAllByUser);
     }
 
+    public Optional<Tutorial> findBySkillAndId(UUID skillId, UUID tutorialId)
+    {
+        return repository.findBySkillAndId(
+                skillRepository.find(skillId).orElseThrow(),
+                tutorialId);
+    }
+
 }

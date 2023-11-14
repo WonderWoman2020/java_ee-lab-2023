@@ -30,4 +30,9 @@ public interface TutorialController {
     @Produces(MediaType.APPLICATION_JSON)
     GetTutorialsResponse getTutorialsBySkill(@PathParam("skillId") UUID skillId);
 
+    @GET
+    @Path("/skills/{skillId}/tutorials/{tutorialId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    GetTutorialResponse getTutorialBySkill(@PathParam("skillId") UUID skillId, @PathParam("tutorialId") UUID tutorialId);
+
 }

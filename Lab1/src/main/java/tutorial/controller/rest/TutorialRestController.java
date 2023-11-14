@@ -51,4 +51,10 @@ public class TutorialRestController implements TutorialController {
         return new TutorialsToResponseFunction().apply(service.findAllBySkill(skillId)
                 .orElseThrow(NotFoundException::new));
     }
+
+    @Override
+    public GetTutorialResponse getTutorialBySkill(UUID skillId, UUID tutorialId) {
+        return new TutorialToResponseFunction().apply(service.findBySkillAndId(skillId, tutorialId)
+                .orElseThrow(NotFoundException::new));
+    }
 }

@@ -63,4 +63,11 @@ public class TutorialInMemoryRepository implements TutorialRepository {
                 .filter(tutorial -> skill.equals(tutorial.getSkill()))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public Optional<Tutorial> findBySkillAndId(Skill skill, UUID id) {
+        return findAllBySkill(skill).stream()
+                .filter(tutorial -> tutorial.getId().equals(id))
+                .findFirst();
+    }
 }

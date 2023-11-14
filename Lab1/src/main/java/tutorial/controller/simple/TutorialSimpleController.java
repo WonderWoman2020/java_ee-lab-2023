@@ -50,4 +50,9 @@ public class TutorialSimpleController implements TutorialController {
     public GetTutorialsResponse getTutorialsBySkill(UUID skillId) {
         return null;
     }
+
+    @Override
+    public GetTutorialResponse getTutorialBySkill(UUID skillId, UUID tutorialId) {
+        return null;
+    }
 }

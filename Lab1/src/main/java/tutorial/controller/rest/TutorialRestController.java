@@ -1,27 +1,27 @@
-package tutorial.controller.simple;
+package tutorial.controller.rest;
 
 import controller.exception.NotFoundException;
-import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.Alternative;
+import jakarta.enterprise.inject.Default;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.Path;
 import tutorial.controller.api.TutorialController;
 import tutorial.dto.GetTutorialResponse;
 import tutorial.dto.GetTutorialsResponse;
 import tutorial.dto.function.TutorialToResponseFunction;
 import tutorial.dto.function.TutorialsToResponseFunction;
 import tutorial.service.TutorialService;
-import user.dto.function.UserToResponseFunction;
 
 import java.util.UUID;
 
 @Alternative
-@RequestScoped
-public class TutorialSimpleController implements TutorialController {
+@Path("")//Annotation required by the specification.
+public class TutorialRestController implements TutorialController {
 
     private TutorialService service;
 
     @Inject
-    public TutorialSimpleController(TutorialService service) {
+    public TutorialRestController(TutorialService service) {
         this.service = service;
     }
 

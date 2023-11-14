@@ -35,4 +35,8 @@ public interface TutorialController {
     @Produces(MediaType.APPLICATION_JSON)
     GetTutorialResponse getTutorialBySkill(@PathParam("skillId") UUID skillId, @PathParam("tutorialId") UUID tutorialId);
 
+    @DELETE
+    @Path("/skills/{skillId}/tutorials/{tutorialId}")
+    void deleteTutorialBySkill(@PathParam("skillId") UUID skillId, @PathParam("tutorialId") UUID tutorialId);
+
 }

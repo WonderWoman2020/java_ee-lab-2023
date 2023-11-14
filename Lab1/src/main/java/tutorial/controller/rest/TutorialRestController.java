@@ -1,6 +1,7 @@
 package tutorial.controller.rest;
 
-import controller.exception.NotFoundException;
+//import controller.exception.NotFoundException;
+import jakarta.ws.rs.NotFoundException;
 import jakarta.enterprise.inject.Alternative;
 import jakarta.enterprise.inject.Default;
 import jakarta.inject.Inject;
@@ -56,5 +57,15 @@ public class TutorialRestController implements TutorialController {
     public GetTutorialResponse getTutorialBySkill(UUID skillId, UUID tutorialId) {
         return new TutorialToResponseFunction().apply(service.findBySkillAndId(skillId, tutorialId)
                 .orElseThrow(NotFoundException::new));
+    }
+
+    @Override
+    public void deleteTutorialBySkill(UUID skillId, UUID tutorialId) {
+        service.findBySkillAndId(skillId, tutorialId).ifPresentOrElse(
+                entity -> service.delete(entity.getId()),
+                () -> {
+                    throw new NotFoundException();
+                }
+        );
     }
 }

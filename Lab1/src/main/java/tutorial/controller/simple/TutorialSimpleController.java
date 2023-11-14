@@ -55,4 +55,9 @@ public class TutorialSimpleController implements TutorialController {
     public GetTutorialResponse getTutorialBySkill(UUID skillId, UUID tutorialId) {
         return null;
     }
+
+    @Override
+    public void deleteTutorialBySkill(UUID skillId, UUID tutorialId) {
+
+    }
 }

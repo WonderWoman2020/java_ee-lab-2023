@@ -21,4 +21,13 @@ public interface TutorialController {
     @DELETE
     @Path("/tutorials/{id}")
     void deleteTutorial(@PathParam("id") UUID id);
+
+    /**
+     * Hierarchical by skill requests
+     */
+    @GET
+    @Path("/skills/{skillId}/tutorials")
+    @Produces(MediaType.APPLICATION_JSON)
+    GetTutorialsResponse getTutorialsBySkill(@PathParam("skillId") UUID skillId);
+
 }

@@ -105,3 +105,15 @@ GET http://localhost:8080/Lab1/api/tutorials/12345678-cccc-cccc-cccc-123456789ab
 DELETE http://localhost:8080/Lab1/api/tutorials/12345678-cccc-cccc-cccc-123456789abc
 
 ###
+
+# Get all tutorials, hierarchical by skill
+
+GET http://localhost:8080/Lab1/api/skills/87654321-bbbb-bbbb-bbbb-cba987654321/tutorials
+
+###
+
+# Get single tutorial, hierarchical by skill
+
+GET http://localhost:8080/Lab1/api/skills/87654321-bbbb-bbbb-bbbb-cba987654321/tutorials/12345678-bbbb-bbbb-bbbb-123456789abc
+
+###

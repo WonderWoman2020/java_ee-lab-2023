@@ -4,6 +4,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import tutorial.dto.GetTutorialResponse;
 import tutorial.dto.GetTutorialsResponse;
+import tutorial.dto.PatchTutorialRequest;
 import tutorial.dto.PutTutorialRequest;
 
 import java.util.UUID;
@@ -44,5 +45,10 @@ public interface TutorialController {
     @Path("/skills/{skillId}/tutorials/{tutorialId}")
     @Consumes(MediaType.APPLICATION_JSON)
     void putTutorialBySkill(@PathParam("skillId") UUID skillId, @PathParam("tutorialId") UUID tutorialId, PutTutorialRequest request);
+
+    @PATCH
+    @Path("/skills/{skillId}/tutorials/{tutorialId}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    void patchTutorialBySkill(@PathParam("skillId") UUID skillId, @PathParam("tutorialId") UUID tutorialId, PatchTutorialRequest request);
 
 }

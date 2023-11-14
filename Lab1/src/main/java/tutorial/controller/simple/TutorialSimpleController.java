@@ -7,6 +7,7 @@ import jakarta.inject.Inject;
 import tutorial.controller.api.TutorialController;
 import tutorial.dto.GetTutorialResponse;
 import tutorial.dto.GetTutorialsResponse;
+import tutorial.dto.PatchTutorialRequest;
 import tutorial.dto.PutTutorialRequest;
 import tutorial.dto.function.TutorialToResponseFunction;
 import tutorial.dto.function.TutorialsToResponseFunction;
@@ -64,6 +65,11 @@ public class TutorialSimpleController implements TutorialController {
 
     @Override
     public void putTutorialBySkill(UUID skillId, UUID tutorialId, PutTutorialRequest request) {
+
+    }
+
+    @Override
+    public void patchTutorialBySkill(UUID skillId, UUID tutorialId, PatchTutorialRequest request) {
 
     }
 }

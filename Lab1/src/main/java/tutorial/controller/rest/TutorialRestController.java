@@ -10,10 +10,12 @@ import jakarta.ws.rs.Path;
 import tutorial.controller.api.TutorialController;
 import tutorial.dto.GetTutorialResponse;
 import tutorial.dto.GetTutorialsResponse;
+import tutorial.dto.PatchTutorialRequest;
 import tutorial.dto.PutTutorialRequest;
 import tutorial.dto.function.RequestToTutorialFunction;
 import tutorial.dto.function.TutorialToResponseFunction;
 import tutorial.dto.function.TutorialsToResponseFunction;
+import tutorial.dto.function.UpdateTutorialWithRequestFunction;
 import tutorial.service.TutorialService;
 
 import java.util.HashMap;
@@ -84,5 +86,15 @@ public class TutorialRestController implements TutorialController {
         } catch (IllegalArgumentException ex) {
             throw new BadRequestException(ex);
         }
+    }
+
+    @Override
+    public void patchTutorialBySkill(UUID skillId, UUID tutorialId, PatchTutorialRequest request) {
+        service.findBySkillAndId(skillId, tutorialId).ifPresentOrElse(
+                entity -> service.update(new UpdateTutorialWithRequestFunction().apply(entity, request)),
+                () -> {
+                    throw new NotFoundException();
+                }
+        );
     }
 }

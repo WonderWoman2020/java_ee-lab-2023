@@ -1,10 +1,11 @@
-package skill.controller.simple;
+package skill.controller.rest;
 
-import controller.exception.NotFoundException;
 import controller.exception.BadRequestException;
+import controller.exception.NotFoundException;
 import jakarta.enterprise.context.RequestScoped;
-import jakarta.enterprise.inject.Alternative;
+import jakarta.enterprise.inject.Default;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.Path;
 import skill.controller.api.SkillController;
 import skill.dto.GetSkillResponse;
 import skill.dto.GetSkillsResponse;
@@ -13,17 +14,15 @@ import skill.dto.function.RequestToSkillFunction;
 import skill.dto.function.SkillToResponseFunction;
 import skill.dto.function.SkillsToResponseFunction;
 import skill.service.SkillService;
-import user.dto.function.UserToResponseFunction;
 
 import java.util.UUID;
 
-@RequestScoped
-@Alternative
-public class SkillSimpleController implements SkillController {
+@Path("")//Annotation required by the specification.
+public class SkillRestController implements SkillController {
 
     private SkillService service;
     @Inject
-    public SkillSimpleController(SkillService service) {
+    public SkillRestController(SkillService service) {
         this.service = service;
     }
 

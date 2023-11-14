@@ -14,7 +14,7 @@ import java.util.UUID;
 @ToString
 @EqualsAndHashCode
 public class PutSkillRequest {
-    private UUID id;
+    //private UUID id;
     private String name;
     private String description;
     private DifficultyLevel level;

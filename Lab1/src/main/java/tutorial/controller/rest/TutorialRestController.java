@@ -1,6 +1,7 @@
 package tutorial.controller.rest;
 
 //import controller.exception.NotFoundException;
+import jakarta.ws.rs.BadRequestException;
 import jakarta.ws.rs.NotFoundException;
 import jakarta.enterprise.inject.Alternative;
 import jakarta.enterprise.inject.Default;
@@ -9,10 +10,14 @@ import jakarta.ws.rs.Path;
 import tutorial.controller.api.TutorialController;
 import tutorial.dto.GetTutorialResponse;
 import tutorial.dto.GetTutorialsResponse;
+import tutorial.dto.PutTutorialRequest;
+import tutorial.dto.function.RequestToTutorialFunction;
 import tutorial.dto.function.TutorialToResponseFunction;
 import tutorial.dto.function.TutorialsToResponseFunction;
 import tutorial.service.TutorialService;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 @Alternative
@@ -67,5 +72,17 @@ public class TutorialRestController implements TutorialController {
                     throw new NotFoundException();
                 }
         );
+    }
+
+    @Override
+    public void putTutorialBySkill(UUID skillId, UUID tutorialId, PutTutorialRequest request) {
+        try {
+            Map<String, UUID> uuids = new HashMap<>();
+            uuids.put("tutorialId", tutorialId);
+            uuids.put("skillId", skillId);
+            service.create(new RequestToTutorialFunction().apply(uuids, request));
+        } catch (IllegalArgumentException ex) {
+            throw new BadRequestException(ex);
+        }
     }
 }

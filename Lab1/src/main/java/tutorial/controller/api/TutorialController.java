@@ -4,6 +4,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import tutorial.dto.GetTutorialResponse;
 import tutorial.dto.GetTutorialsResponse;
+import tutorial.dto.PutTutorialRequest;
 
 import java.util.UUID;
 
@@ -38,5 +39,10 @@ public interface TutorialController {
     @DELETE
     @Path("/skills/{skillId}/tutorials/{tutorialId}")
     void deleteTutorialBySkill(@PathParam("skillId") UUID skillId, @PathParam("tutorialId") UUID tutorialId);
+
+    @PUT
+    @Path("/skills/{skillId}/tutorials/{tutorialId}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    void putTutorialBySkill(@PathParam("skillId") UUID skillId, @PathParam("tutorialId") UUID tutorialId, PutTutorialRequest request);
 
 }

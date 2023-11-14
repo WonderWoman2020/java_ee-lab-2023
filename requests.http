@@ -123,3 +123,29 @@ GET http://localhost:8080/Lab1/api/skills/87654321-bbbb-bbbb-bbbb-cba987654321/t
 DELETE http://localhost:8080/Lab1/api/skills/87654321-bbbb-bbbb-bbbb-cba987654321/tutorials/12345678-aaaa-aaaa-aaaa-123456789abc
 
 ###
+
+# Create new tutorial, hierarchical by skill
+
+PUT http://localhost:8080/Lab1/api/skills/87654321-bbbb-bbbb-bbbb-cba987654321/tutorials/12345678-ffff-ffff-ffff-123456789abc
+Content-Type: application/json
+
+{
+  "title": "How to start skating",
+  "description": "First step to achieve this is...",
+  "duration": 2
+}
+
+###
+
+# Update tutorial, hierarchical by skill
+
+PATCH http://localhost:8080/Lab1/api/skills/87654321-bbbb-bbbb-bbbb-cba987654321/tutorials/12345678-ffff-ffff-ffff-123456789abc
+Content-Type: application/json
+
+{
+  "title": "How to enjoy the training",
+  "description": "First step to achieve this is...",
+  "duration": 1
+}
+
+###

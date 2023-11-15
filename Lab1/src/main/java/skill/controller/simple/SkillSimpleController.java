@@ -8,6 +8,7 @@ import jakarta.inject.Inject;
 import skill.controller.api.SkillController;
 import skill.dto.GetSkillResponse;
 import skill.dto.GetSkillsResponse;
+import skill.dto.PatchSkillRequest;
 import skill.dto.PutSkillRequest;
 import skill.dto.function.RequestToSkillFunction;
 import skill.dto.function.SkillToResponseFunction;
@@ -55,5 +56,10 @@ public class SkillSimpleController implements SkillController {
         } catch (IllegalArgumentException ex) {
             throw new BadRequestException(ex);
         }
+    }
+
+    @Override
+    public void patchSkill(UUID id, PatchSkillRequest request) {
+
     }
 }

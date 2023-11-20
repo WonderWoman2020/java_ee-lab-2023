@@ -2,6 +2,7 @@ package skill.repository.memory;
 
 import datastore.component.DataStore;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.inject.Alternative;
 import jakarta.inject.Inject;
 import skill.entity.Skill;
 import skill.repository.api.SkillRepository;
@@ -12,6 +13,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+@Alternative
 @RequestScoped
 public class SkillInMemoryRepository implements SkillRepository {
 

@@ -2,6 +2,7 @@ package tutorial.service;
 
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import lombok.NoArgsConstructor;
 import skill.repository.api.SkillRepository;
 import tutorial.entity.Tutorial;
@@ -35,14 +36,17 @@ public class TutorialService {
     {
         return repository.findAll();
     }
+    @Transactional
     public void create(Tutorial tutorial)
     {
         repository.create(tutorial);
     }
+    @Transactional
     public void update(Tutorial tutorial)
     {
         repository.update(tutorial);
     }
+    @Transactional
     public void delete(UUID id)
     {
         repository.delete(repository.find(id).orElseThrow());

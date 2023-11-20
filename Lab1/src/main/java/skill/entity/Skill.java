@@ -1,5 +1,6 @@
 package skill.entity;
 
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import tutorial.entity.Tutorial;
@@ -16,8 +17,11 @@ import java.util.UUID;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @ToString()
 @EqualsAndHashCode()
+@Entity
+@Table(name = "skills")
 public class Skill implements Serializable {
 
+    @Id
     private UUID id;
     private String name;
     private String description;
@@ -37,6 +41,9 @@ public class Skill implements Serializable {
      * Tutorials about that skill
      */
     @Singular
+    @ToString.Exclude//It's common to exclude lists from toString
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "skill", cascade = CascadeType.REMOVE)
     private List<Tutorial> tutorials;
 
 }

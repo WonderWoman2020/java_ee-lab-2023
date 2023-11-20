@@ -1,5 +1,6 @@
 package tutorial.entity;
 
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import skill.entity.Skill;
@@ -15,11 +16,16 @@ import java.util.UUID;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @ToString()
 @EqualsAndHashCode()
+@Entity
+@Table(name = "tutorials")
 public class Tutorial implements Serializable {
 
+    @Id
     private UUID id;
     private String title;
     private User author;
+    @ManyToOne
+    @JoinColumn(name = "skill")
     private Skill skill;
 
     /**

@@ -2,6 +2,7 @@ package skill.service;
 
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import lombok.NoArgsConstructor;
 import skill.entity.Skill;
 import skill.repository.api.SkillRepository;
@@ -34,14 +35,17 @@ public class SkillService {
     {
         return repository.findAll();
     }
+    @Transactional
     public void create(Skill skill)
     {
         repository.create(skill);
     }
+    @Transactional
     public void update(Skill skill)
     {
         repository.update(skill);
     }
+    @Transactional
     public void delete(UUID id)
     {
         repository.delete(repository.find(id).orElseThrow());

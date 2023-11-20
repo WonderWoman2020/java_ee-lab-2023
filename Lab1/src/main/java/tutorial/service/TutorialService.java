@@ -39,7 +39,19 @@ public class TutorialService {
     @Transactional
     public void create(Tutorial tutorial)
     {
+        if (repository.find(tutorial.getId()).isPresent()) {
+            throw new IllegalArgumentException("Tutorial already exists.");
+        }
+        if (skillRepository.find(tutorial.getSkill().getId()).isEmpty()) {
+            throw new IllegalArgumentException("Skill does not exists.");
+        }
         repository.create(tutorial);
+        /* Both sides of relationship must be handled (if accessed) because of cache. */
+//        professionRepository.find(character.getProfession().getId())
+//                .ifPresent(profession -> profession.getCharacters().add(character));
+//        userRepository.find(character.getUser().getId())
+//                .ifPresent(user -> user.getCharacters().add(character));
+
     }
     @Transactional
     public void update(Tutorial tutorial)

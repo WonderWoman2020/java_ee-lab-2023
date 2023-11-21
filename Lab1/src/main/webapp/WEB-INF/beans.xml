@@ -6,6 +6,7 @@
 
     <alternatives>
         <class>tutorial.controller.rest.TutorialRestController</class>
+        <class>user.controller.rest.UserRestController</class>
     </alternatives>
 
 </beans>

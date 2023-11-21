@@ -50,9 +50,9 @@ public class UserService {
         repository.update(user);
     }
     @Transactional
-    public void delete(User user)
+    public void delete(UUID id)
     {
-        repository.delete(user);
+        repository.delete(repository.find(id).orElseThrow());
     }
 
     public void updateAvatar(UUID id, InputStream is) {

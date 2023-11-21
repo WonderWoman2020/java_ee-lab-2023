@@ -16,4 +16,6 @@ public interface TutorialRepository extends Repository<Tutorial, UUID> {
     List<Tutorial> findAllBySkill(Skill skill);
 
     public Optional<Tutorial> findBySkillAndId(Skill skill, UUID id);
+
+    public Optional<Tutorial> findByUserAndId(User user, UUID id);
 }

@@ -81,4 +81,11 @@ public class TutorialService {
                 tutorialId);
     }
 
+    public Optional<Tutorial> findByUserAndId(UUID userId, UUID tutorialId)
+    {
+        return repository.findByUserAndId(
+                userRepository.find(userId).orElseThrow(),
+                tutorialId);
+    }
+
 }

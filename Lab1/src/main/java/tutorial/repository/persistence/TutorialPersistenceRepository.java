@@ -84,4 +84,16 @@ public class TutorialPersistenceRepository implements TutorialRepository {
             return Optional.empty();
         }
     }
+
+    @Override
+    public Optional<Tutorial> findByUserAndId(User user, UUID id) {
+        try {
+            return Optional.of(em.createQuery("select t from Tutorial t where t.id = :id and t.author = :author", Tutorial.class)
+                    .setParameter("author", user)
+                    .setParameter("id", id)
+                    .getSingleResult());
+        } catch (NoResultException ex) {
+            return Optional.empty();
+        }
+    }
 }

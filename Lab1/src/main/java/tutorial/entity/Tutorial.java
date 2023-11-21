@@ -23,7 +23,11 @@ public class Tutorial implements Serializable {
     @Id
     private UUID id;
     private String title;
+
+    @ManyToOne
+    @JoinColumn(name = "author")
     private User author;
+
     @ManyToOne
     @JoinColumn(name = "skill")
     private Skill skill;

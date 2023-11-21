@@ -2,6 +2,7 @@ package user.repository.memory;
 
 import datastore.component.DataStore;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.inject.Alternative;
 import jakarta.inject.Inject;
 import user.entity.User;
 import user.repository.api.UserRepository;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@Alternative
 @RequestScoped
 public class UserInMemoryRepository implements UserRepository {
 

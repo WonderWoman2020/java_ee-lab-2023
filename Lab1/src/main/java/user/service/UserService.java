@@ -3,6 +3,7 @@ package user.service;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import lombok.NoArgsConstructor;
 import user.entity.User;
 import user.repository.api.UserRepository;
@@ -38,14 +39,17 @@ public class UserService {
     {
         return repository.findAll();
     }
+    @Transactional
     public void create(User user)
     {
         repository.create(user);
     }
+    @Transactional
     public void update(User user)
     {
         repository.update(user);
     }
+    @Transactional
     public void delete(User user)
     {
         repository.delete(user);

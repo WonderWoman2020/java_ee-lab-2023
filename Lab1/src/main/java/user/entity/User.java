@@ -1,5 +1,6 @@
 package user.entity;
 
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import tutorial.entity.Tutorial;
@@ -16,16 +17,28 @@ import java.util.UUID;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @ToString()
 @EqualsAndHashCode()
+@Entity
+@Table(name = "users")
 public class User implements Serializable {
+
+    @Id
     private UUID id;
+
     private String nick;
+
     private String login;
+
+    @ToString.Exclude
     private String password;
+
     private LocalDate birthDate;
 
     /**
      * Security roles
      */
+    @CollectionTable(name = "users__roles", joinColumns = @JoinColumn(name = "id"))
+    @Column(name = "role")
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles;
 
     /**
@@ -37,5 +50,8 @@ public class User implements Serializable {
      * Created tutorials
      */
     @Singular
+    @ToString.Exclude//It's common to exclude lists from toString
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE)
     private List<Tutorial> tutorials;
 }

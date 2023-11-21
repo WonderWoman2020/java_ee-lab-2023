@@ -8,6 +8,7 @@
         <class>tutorial.controller.rest.TutorialRestController</class>
         <class>skill.repository.persistence.SkillPersistenceRepository</class>
         <class>tutorial.repository.persistence.TutorialPersistenceRepository</class>
+        <class>user.repository.persistence.UserPersistenceRepository</class>
     </alternatives>
 
 </beans>

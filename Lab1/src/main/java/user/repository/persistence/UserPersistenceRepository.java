@@ -18,7 +18,6 @@ import java.util.UUID;
  * safe). Because services are CDI application scoped beans (technically singletons) then repositories must be thread
  * scoped in order to ensure single entity manager for single thread.
  */
-@Alternative
 @RequestScoped
 public class UserPersistenceRepository implements UserRepository {
 

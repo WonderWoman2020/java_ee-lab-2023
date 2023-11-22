@@ -28,7 +28,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-@Alternative
 @Path("")//Annotation required by the specification.
 public class TutorialRestController implements TutorialController {
 

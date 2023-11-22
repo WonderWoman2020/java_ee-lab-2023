@@ -29,7 +29,6 @@ import user.service.UserService;
 import java.io.InputStream;
 import java.util.UUID;
 
-@Alternative
 @Path("")//Annotation required by the specification.
 public class UserRestController implements UserController {
 

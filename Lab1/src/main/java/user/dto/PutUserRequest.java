@@ -17,6 +17,11 @@ public class PutUserRequest {
 
     private UUID id;
     private String nick;
+
+    private String login;
+
+    private String password;
+
     private LocalDate birthDate;
 
     /**

@@ -15,6 +15,8 @@ public class RequestToUserFunction implements BiFunction<UUID, PutUserRequest, U
         return User.builder()
                 .id(uuid)
                 .nick(request.getNick())
+                .login(request.getLogin())
+                .password(request.getPassword())
                 .birthDate(request.getBirthDate())
                 .reputation(request.getReputation())
                 .roles(request.getRoles())

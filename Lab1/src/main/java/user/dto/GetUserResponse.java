@@ -18,6 +18,9 @@ public class GetUserResponse {
 
     private UUID id;
     private String nick;
+
+    private String login;
+
     private LocalDate birthDate;
 
     /**

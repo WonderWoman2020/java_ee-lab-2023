@@ -11,6 +11,7 @@ public class UserToResponseFunction implements Function<User, GetUserResponse> {
         return GetUserResponse.builder()
                 .id(user.getId())
                 .nick(user.getNick())
+                .login(user.getLogin())
                 .birthDate(user.getBirthDate())
                 .roles(user.getRoles())
                 .reputation(user.getReputation())

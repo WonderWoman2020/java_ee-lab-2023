@@ -18,6 +18,8 @@ Content-Type: application/json
 {
   "birthDate": "2023-10-25",
   "nick": "I'm new here!",
+  "login": "login-of-newest",
+  "password": "password-of-newest!",
   "reputation": 10,
   "roles": []
 }

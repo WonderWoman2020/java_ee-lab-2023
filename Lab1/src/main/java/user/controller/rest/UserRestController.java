@@ -14,11 +14,14 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriBuilder;
 import jakarta.ws.rs.core.UriInfo;
+import skill.dto.function.UpdateSkillWithRequestFunction;
 import user.controller.api.UserController;
 import user.dto.GetUserResponse;
 import user.dto.GetUsersResponse;
+import user.dto.PatchUserRequest;
 import user.dto.PutUserRequest;
 import user.dto.function.RequestToUserFunction;
+import user.dto.function.UpdateUserWithRequestFunction;
 import user.dto.function.UserToResponseFunction;
 import user.dto.function.UsersToResponseFunction;
 import user.service.UserService;
@@ -94,7 +97,7 @@ public class UserRestController implements UserController {
         }
     }
 
-    /*@Override
+    @Override
     public void patchUser(UUID id, PatchUserRequest request) {
         service.find(id).ifPresentOrElse(
                 entity -> service.update(new UpdateUserWithRequestFunction().apply(entity, request)),
@@ -102,7 +105,7 @@ public class UserRestController implements UserController {
                     throw new NotFoundException();
                 }
         );
-    }*/
+    }
 
     @Override
     public byte[] getUserAvatar(UUID id) {

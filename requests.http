@@ -164,3 +164,15 @@ Content-Type: application/json
 }
 
 ###
+
+# Update user
+
+PATCH http://localhost:8080/Lab1/api/users/12345678-dddd-dddd-dddd-123456789abc
+Content-Type: application/json
+
+{
+  "birthDate": "2023-01-01",
+  "nick": "average-anime-enjoyer",
+  "reputation": 20,
+  "roles": ["USER"]
+}

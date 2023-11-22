@@ -2,9 +2,11 @@ package user.controller.api;
 
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import skill.dto.PatchSkillRequest;
 import skill.dto.PutSkillRequest;
 import user.dto.GetUserResponse;
 import user.dto.GetUsersResponse;
+import user.dto.PatchUserRequest;
 import user.dto.PutUserRequest;
 
 import java.io.InputStream;
@@ -31,6 +33,11 @@ public interface UserController {
     @Path("/users/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     void putUser(@PathParam("id") UUID id, PutUserRequest request);
+
+    @PATCH
+    @Path("/users/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    void patchUser(@PathParam("id") UUID id, PatchUserRequest request);
 
 
     @GET

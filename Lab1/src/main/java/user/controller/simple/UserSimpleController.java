@@ -7,6 +7,7 @@ import skill.dto.function.RequestToSkillFunction;
 import user.controller.api.UserController;
 import user.dto.GetUserResponse;
 import user.dto.GetUsersResponse;
+import user.dto.PatchUserRequest;
 import user.dto.PutUserRequest;
 import user.dto.function.RequestToUserFunction;
 import user.dto.function.UserToResponseFunction;
@@ -56,6 +57,11 @@ public class UserSimpleController implements UserController {
         } catch (IllegalArgumentException ex) {
             throw new BadRequestException(ex);
         }
+    }
+
+    @Override
+    public void patchUser(UUID id, PatchUserRequest request) {
+
     }
 
     @Override

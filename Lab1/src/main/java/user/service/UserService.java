@@ -1,5 +1,7 @@
 package user.service;
 
+import jakarta.ejb.LocalBean;
+import jakarta.ejb.Stateless;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
@@ -17,7 +19,8 @@ import java.util.Optional;
 import java.util.Properties;
 import java.util.UUID;
 
-@RequestScoped
+@LocalBean
+@Stateless
 @NoArgsConstructor(force = true)
 public class UserService {
 
@@ -39,17 +42,17 @@ public class UserService {
     {
         return repository.findAll();
     }
-    @Transactional
+
     public void create(User user)
     {
         repository.create(user);
     }
-    @Transactional
+
     public void update(User user)
     {
         repository.update(user);
     }
-    @Transactional
+
     public void delete(UUID id)
     {
         repository.delete(repository.find(id).orElseThrow());

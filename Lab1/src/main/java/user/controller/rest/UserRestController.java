@@ -3,6 +3,7 @@ package user.controller.rest;
 //import controller.exception.BadRequestException;
 //import controller.exception.NotFoundException;
 
+import jakarta.ejb.EJB;
 import jakarta.enterprise.inject.Alternative;
 import jakarta.inject.Inject;
 import jakarta.servlet.http.HttpServletResponse;
@@ -49,10 +50,15 @@ public class UserRestController implements UserController {
         //ATM in this implementation only HttpServletRequest can be injected with CDI so JAX-RS injection is used.
         this.response = response;
     }
+
+    @EJB
+    public void setService(UserService userService)
+    {
+        this.service = userService;
+    }
+
     @Inject
-    public UserRestController(UserService service,
-                              @SuppressWarnings("CdiInjectionPointsInspection") UriInfo uriInfo) {
-        this.service = service;
+    public UserRestController(@SuppressWarnings("CdiInjectionPointsInspection") UriInfo uriInfo) {
         this.uriInfo = uriInfo;
     }
 

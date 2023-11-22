@@ -2,6 +2,7 @@ package skill.controller.rest;
 
 //import controller.exception.BadRequestException;
 //import controller.exception.NotFoundException;
+import jakarta.ejb.EJB;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.BadRequestException;
@@ -47,10 +48,13 @@ public class SkillRestController implements SkillController {
         //ATM in this implementation only HttpServletRequest can be injected with CDI so JAX-RS injection is used.
         this.response = response;
     }
+    @EJB
+    public void setService(SkillService skillService)
+    {
+        this.service = skillService;
+    }
     @Inject
-    public SkillRestController(SkillService service,
-                               @SuppressWarnings("CdiInjectionPointsInspection") UriInfo uriInfo) {
-        this.service = service;
+    public SkillRestController(@SuppressWarnings("CdiInjectionPointsInspection") UriInfo uriInfo) {
         this.uriInfo = uriInfo;
     }
 

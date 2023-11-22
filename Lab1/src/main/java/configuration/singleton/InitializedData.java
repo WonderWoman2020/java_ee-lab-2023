@@ -28,7 +28,7 @@ public class InitializedData {
     /**
      * User service.
      */
-    /*private UserService userService;
+    private UserService userService;
 
     private SkillService skillService;
 
@@ -50,7 +50,7 @@ public class InitializedData {
     public void setSkillService(SkillService skillService)
     {
         this.skillService = skillService;
-    }*/
+    }
 
     /**
      * Initializes database with some example values. Should be called after creating this object. This object should be
@@ -60,7 +60,7 @@ public class InitializedData {
     @SneakyThrows
     private void init() {
         System.out.println("Singleton data initializer");
-        /*if(skillService.findAll().isEmpty())
+        if(skillService.findAll().isEmpty())
         {
             User user1 = User.builder()
                     .id(UUID.fromString("12345678-BBBB-BBBB-BBBB-123456789ABC"))
@@ -176,7 +176,7 @@ public class InitializedData {
             tutorialService.create(tutorial1);
             tutorialService.create(tutorial2);
             tutorialService.create(tutorial3);
-        }*/
+        }
     }
 
 }

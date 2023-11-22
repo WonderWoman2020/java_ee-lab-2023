@@ -24,11 +24,11 @@ public class InitializedData {
     /**
      * User service.
      */
-    private final UserService userService;
+    /*private final UserService userService;
 
     private final SkillService skillService;
 
-    private final TutorialService tutorialService;
+    private final TutorialService tutorialService;*/
 
 
     /**
@@ -45,17 +45,19 @@ public class InitializedData {
      */
     @Inject
     public InitializedData(
-            UserService userService,
-            SkillService skillService, TutorialService tutorialService, RequestContextController requestContextController
+            /*UserService userService,
+            SkillService skillService,
+            TutorialService tutorialService,*/
+            RequestContextController requestContextController
     ) {
-        this.userService = userService;
+        /*this.userService = userService;
         this.skillService = skillService;
-        this.tutorialService = tutorialService;
+        this.tutorialService = tutorialService;*/
         this.requestContextController = requestContextController;
     }
 
     public void contextInitialized(@Observes @Initialized(ApplicationScoped.class) Object init) {
-        init();
+        //init();
     }
 
     /**
@@ -66,7 +68,7 @@ public class InitializedData {
     private void init() {
         requestContextController.activate();// start request scope in order to inject request scoped repositories
 
-        if(skillService.findAll().isEmpty())
+        /*if(skillService.findAll().isEmpty())
         {
             User user1 = User.builder()
                     .id(UUID.fromString("12345678-BBBB-BBBB-BBBB-123456789ABC"))
@@ -182,7 +184,7 @@ public class InitializedData {
             tutorialService.create(tutorial1);
             tutorialService.create(tutorial2);
             tutorialService.create(tutorial3);
-        }
+        }*/
 
         requestContextController.deactivate();
     }

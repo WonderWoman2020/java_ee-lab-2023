@@ -1,5 +1,6 @@
 package tutorial.repository.persistence;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.Alternative;
 import jakarta.persistence.EntityManager;
@@ -20,7 +21,7 @@ import java.util.UUID;
  * safe). Because services are CDI application scoped beans (technically singletons) then repositories must be thread
  * scoped in order to ensure single entity manager for single thread.
  */
-@RequestScoped
+@Dependent
 public class TutorialPersistenceRepository implements TutorialRepository {
 
     /**

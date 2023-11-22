@@ -1,6 +1,7 @@
 package tutorial.controller.rest;
 
 //import controller.exception.NotFoundException;
+import jakarta.ejb.EJB;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.ws.rs.BadRequestException;
 import jakarta.ws.rs.NotFoundException;
@@ -49,11 +50,15 @@ public class TutorialRestController implements TutorialController {
         this.response = response;
     }
 
-    @Inject
-    public TutorialRestController(TutorialService service,
-                                  @SuppressWarnings("CdiInjectionPointsInspection") UriInfo uriInfo)
+    @EJB
+    public void setService(TutorialService tutorialService)
     {
-        this.service = service;
+        this.service = tutorialService;
+    }
+
+    @Inject
+    public TutorialRestController(@SuppressWarnings("CdiInjectionPointsInspection") UriInfo uriInfo)
+    {
         this.uriInfo = uriInfo;
     }
 

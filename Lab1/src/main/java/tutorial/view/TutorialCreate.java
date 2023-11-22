@@ -1,6 +1,7 @@
 package tutorial.view;
 
 import component.ModelFunctionFactory;
+import jakarta.ejb.EJB;
 import jakarta.enterprise.context.Conversation;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
@@ -32,12 +33,12 @@ public class TutorialCreate implements Serializable {
     /**
      * Service for managing characters.
      */
-    private final TutorialService tutorialService;
+    private TutorialService tutorialService;
 
     /**
      * Service for managing professions.
      */
-    private final SkillService skillService;
+    private SkillService skillService;
 
     /**
      * Factory producing functions for conversion between models and entities.
@@ -56,15 +57,23 @@ public class TutorialCreate implements Serializable {
     @Getter
     private List<SkillModel> skills;
 
+    @EJB
+    public void setTutorialService(TutorialService tutorialService)
+    {
+        this.tutorialService = tutorialService;
+    }
+
+    @EJB
+    public void setSkillService(SkillService skillService)
+    {
+        this.skillService = skillService;
+    }
+
     @Inject
     public TutorialCreate(
-            TutorialService tutorialService,
-            SkillService skillService,
             ModelFunctionFactory factory
     ) {
-        this.tutorialService = tutorialService;
         this.factory = factory;
-        this.skillService = skillService;
     }
 
     /**

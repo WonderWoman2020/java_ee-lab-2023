@@ -1,5 +1,7 @@
 package skill.service;
 
+import jakarta.ejb.LocalBean;
+import jakarta.ejb.Stateless;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -18,7 +20,8 @@ import java.util.Optional;
 import java.util.Properties;
 import java.util.UUID;
 
-@RequestScoped
+@LocalBean
+@Stateless
 @NoArgsConstructor(force = true)
 public class SkillService {
 
@@ -35,17 +38,14 @@ public class SkillService {
     {
         return repository.findAll();
     }
-    @Transactional
     public void create(Skill skill)
     {
         repository.create(skill);
     }
-    @Transactional
     public void update(Skill skill)
     {
         repository.update(skill);
     }
-    @Transactional
     public void delete(UUID id)
     {
         repository.delete(repository.find(id).orElseThrow());

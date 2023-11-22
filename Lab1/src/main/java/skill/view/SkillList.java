@@ -1,5 +1,6 @@
 package skill.view;
 
+import jakarta.ejb.EJB;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -18,7 +19,7 @@ public class SkillList {
     /**
      * Service for managing skills.
      */
-    private final SkillService service;
+    private SkillService service;
 
     /**
      * Skills list exposed to the view.
@@ -34,9 +35,14 @@ public class SkillList {
      * @param service skills service
      * @param factory factory producing functions for conversion between models and entities
      */
+
+    @EJB
+    public void setService(SkillService skillService)
+    {
+        this.service = skillService;
+    }
     @Inject
-    public SkillList(SkillService service, ModelFunctionFactory factory) {
-        this.service = service;
+    public SkillList(ModelFunctionFactory factory) {
         this.factory = factory;
     }
 

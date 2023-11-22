@@ -1,6 +1,7 @@
 package skill.model.converter;
 
 import component.ModelFunctionFactory;
+import jakarta.ejb.EJB;
 import jakarta.faces.component.UIComponent;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.convert.Converter;
@@ -27,21 +28,25 @@ public class SkillModelConverter implements Converter<SkillModel> {
     /**
      * Service for skills management.
      */
-    private final SkillService service;
+    private SkillService service;
 
     /**
      * Factory producing functions for conversion between models and entities.
      */
     private final ModelFunctionFactory factory;
 
+    @EJB
+    public void setService(SkillService skillService)
+    {
+        this.service = skillService;
+    }
 
     /**
      * @param service service for skills management
      * @param factory factory producing functions for conversion between models and entities
      */
     @Inject
-    public SkillModelConverter(SkillService service, ModelFunctionFactory factory) {
-        this.service = service;
+    public SkillModelConverter(ModelFunctionFactory factory) {
         this.factory = factory;
     }
 

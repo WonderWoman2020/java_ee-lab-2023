@@ -1,6 +1,7 @@
 package skill.view;
 
 import component.ModelFunctionFactory;
+import jakarta.ejb.EJB;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
@@ -30,7 +31,7 @@ public class SkillView implements Serializable {
     /**
      * Service for managing skills
      */
-    private final SkillService service;
+    private SkillService service;
 
     /**
      * Factory producing functions for conversion between models and entities.
@@ -53,12 +54,24 @@ public class SkillView implements Serializable {
     /**
      * Service for managing tutorials
      */
-    private final TutorialService tutorialService;
+    private TutorialService tutorialService;
 
     /**
      * Tutorials list exposed to the view.
      */
     private TutorialsModel tutorials;
+
+    @EJB
+    public void setService(SkillService skillService)
+    {
+        this.service = skillService;
+    }
+
+    @EJB
+    public void setTutorialService(TutorialService tutorialService)
+    {
+        this.tutorialService = tutorialService;
+    }
 
 
     /**
@@ -66,10 +79,8 @@ public class SkillView implements Serializable {
      * @param factory factory producing functions for conversion between models and entities
      */
     @Inject
-    public SkillView(SkillService service, ModelFunctionFactory factory, TutorialService tutorialService) {
-        this.service = service;
+    public SkillView(ModelFunctionFactory factory) {
         this.factory = factory;
-        this.tutorialService = tutorialService;
     }
 
     /**

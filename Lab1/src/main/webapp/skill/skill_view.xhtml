@@ -63,7 +63,7 @@
         <article class="text--justified">
             <header><h4>Tutorials</h4></header>
 
-            <h:dataTable value="#{skillView.tutorials.tutorials}" var="tutorial"
+            <h:dataTable id="tutorialTable" value="#{skillView.tutorials.tutorials}" var="tutorial"
                          styleClass="table align-middle mb-0 bg-white" headerClass="bg-light">
 
                 <h:column>
@@ -89,8 +89,8 @@
                     <f:facet name="header">Delete</f:facet>
                     <h:form>
                         <h:commandButton styleClass="btn" value="Delete"
-                                         action="#{skillView.deleteAction(tutorial)}">
-
+                                         actionListener="#{skillView.deleteAction(tutorial)}">
+                            <f:ajax execute="@this" render=":tutorialTable"/>
                         </h:commandButton>
                     </h:form>
                 </h:column>

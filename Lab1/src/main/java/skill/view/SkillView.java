@@ -103,10 +103,9 @@ public class SkillView implements Serializable {
         return tutorials;
     }
 
-    public String deleteAction(TutorialsModel.Tutorial tutorial) {
+    public void deleteAction(TutorialsModel.Tutorial tutorial) {
         tutorialService.delete(tutorial.getId());
-        //String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
-        return "skill_view?id="+id+"&faces-redirect=true";
+        this.tutorials = null;
     }
 
 }

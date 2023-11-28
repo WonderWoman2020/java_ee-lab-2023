@@ -15,7 +15,6 @@ import java.io.Serializable;
 /**
  * View bean for rendering list of skills.
  */
-//@RequestScoped
 @ViewScoped
 @Named
 public class SkillList implements Serializable {
@@ -67,12 +66,7 @@ public class SkillList implements Serializable {
      * Action for clicking delete action.
      *
      * @param skill to be removed
-     * @return navigation case to skill_list
      */
-    /*public String deleteAction(SkillsModel.Skill skill) {
-        service.delete(skill.getId());
-        return "skill_list?faces-redirect=true";
-    }*/
 
     public void deleteAction(SkillsModel.Skill skill) {
         service.delete(skill.getId());

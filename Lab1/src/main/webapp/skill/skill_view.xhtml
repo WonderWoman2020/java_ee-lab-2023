@@ -19,7 +19,7 @@
 
                         <div class="row mb-2">
                             <div class="col-6">
-                                Description
+                                #{messages['categoryViewPage.skillView.description']}
                             </div>
                             <div class="col-6">
                                 <h:outputText value="#{skillView.skill.description}"/>
@@ -28,7 +28,7 @@
 
                         <div class="row mb-2">
                             <div class="col-6">
-                                Difficulty level
+                                #{messages['categoryViewPage.skillView.level']}
                             </div>
                             <div class="col-6">
                                 <h:outputText value="#{skillView.skill.level}"/>
@@ -37,7 +37,7 @@
 
                         <div class="row mb-2">
                             <div class="col-6">
-                                Favourite rank
+                                #{messages['categoryViewPage.skillView.rank']}
                             </div>
                             <div class="col-6">
                                 <h:outputText value="#{skillView.skill.favouriteRank}"/>
@@ -46,7 +46,7 @@
 
                         <div class="row mb-2">
                             <div class="col-6">
-                                Tags
+                                #{messages['categoryViewPage.skillView.tags']}
                             </div>
                             <div class="col-6">
                                 <h:outputText value="#{skillView.skill.tags}"/>
@@ -61,34 +61,34 @@
 
         <!-- Skill tutorials table -->
         <article class="text--justified">
-            <header><h4>Tutorials</h4></header>
+            <header><h4>#{messages['categoryViewPage.skillView.tutorials']}</h4></header>
 
             <h:dataTable id="tutorialTable" value="#{skillView.tutorials.tutorials}" var="tutorial"
                          styleClass="table align-middle mb-0 bg-white" headerClass="bg-light">
 
                 <h:column>
-                    <f:facet name="header">Name</f:facet>
+                    <f:facet name="header">#{messages['categoryViewPage.tutorialTable.name']}</f:facet>
                     <h:outputText value="#{tutorial.title}"/>
                 </h:column>
 
                 <h:column>
-                    <f:facet name="header">View</f:facet>
-                    <h:link outcome="/tutorial/tutorial_view.xhtml" value="View">
+                    <f:facet name="header">#{messages['categoryViewPage.tutorialTable.view']}</f:facet>
+                    <h:link outcome="/tutorial/tutorial_view.xhtml" value="#{messages['categoryViewPage.tutorialTable.view']}">
                         <f:param name="id" value="#{tutorial.id}"/>
                     </h:link>
                 </h:column>
 
                 <h:column>
-                    <f:facet name="header">Edit</f:facet>
-                    <h:link outcome="/tutorial/tutorial_edit.xhtml" value="Edit">
+                    <f:facet name="header">#{messages['categoryViewPage.tutorialTable.edit']}</f:facet>
+                    <h:link outcome="/tutorial/tutorial_edit.xhtml" value="#{messages['categoryViewPage.tutorialTable.edit']}">
                         <f:param name="id" value="#{tutorial.id}"/>
                     </h:link>
                 </h:column>
 
                 <h:column>
-                    <f:facet name="header">Delete</f:facet>
+                    <f:facet name="header">#{messages['categoryViewPage.tutorialTable.delete']}</f:facet>
                     <h:form>
-                        <h:commandButton styleClass="btn" value="Delete"
+                        <h:commandButton styleClass="btn" value="#{messages['categoryViewPage.tutorialTable.delete']}"
                                          actionListener="#{skillView.deleteAction(tutorial)}">
                             <f:ajax execute="@this" render=":tutorialTable"/>
                         </h:commandButton>
@@ -97,7 +97,7 @@
 
                 <f:facet name="footer">
                     <h:button styleClass="btn" outcome="/tutorial/tutorial_create.xhtml"
-                              value="Create new tutorial"/>
+                              value="#{messages['categoryViewPage.tutorialTable.create']}"/>
                 </f:facet>
             </h:dataTable>
         </article>

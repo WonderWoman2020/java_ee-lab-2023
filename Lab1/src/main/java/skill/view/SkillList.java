@@ -2,19 +2,23 @@ package skill.view;
 
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import skill.model.SkillsModel;
 import skill.service.SkillService;
 import component.ModelFunctionFactory;
 
+import java.io.Serializable;
+
 
 /**
  * View bean for rendering list of skills.
  */
-@RequestScoped
+//@RequestScoped
+@ViewScoped
 @Named
-public class SkillList {
+public class SkillList implements Serializable {
 
     /**
      * Service for managing skills.
@@ -65,9 +69,15 @@ public class SkillList {
      * @param skill to be removed
      * @return navigation case to skill_list
      */
-    public String deleteAction(SkillsModel.Skill skill) {
+    /*public String deleteAction(SkillsModel.Skill skill) {
         service.delete(skill.getId());
         return "skill_list?faces-redirect=true";
+    }*/
+
+    public void deleteAction(SkillsModel.Skill skill) {
+        service.delete(skill.getId());
+        this.skills = null;
     }
+
 
 }

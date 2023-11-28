@@ -12,14 +12,14 @@
 
     <ui:define name="content">
         <article>
-            <header><h2>Edit tutorial</h2></header>
+            <header><h2>#{messages['elementEditPage.mainTitle']}</h2></header>
             <h:form styleClass="container" onreset="onReset()" enctype="multipart/form-data">
 
                 <div class="row">
                     <div class="col-4 p-2">
                         <div class="form-outline">
                             <h:inputText id="title" value="#{tutorialEdit.tutorial.title}" styleClass="form-control"/>
-                            <h:outputLabel for="title" value="Title:" styleClass="form-label"/>
+                            <h:outputLabel for="title" value="#{messages['elementEditPage.form.title']}:" styleClass="form-label"/>
                         </div>
                     </div>
                 </div>
@@ -28,7 +28,7 @@
                     <div class="col-4 p-2">
                         <div class="form-outline">
                             <h:inputText id="duration" value="#{tutorialEdit.tutorial.duration}" styleClass="form-control"/>
-                            <h:outputLabel for="duration" value="Duration (hours):" styleClass="form-label"/>
+                            <h:outputLabel for="duration" value="#{messages['elementEditPage.form.duration']}:" styleClass="form-label"/>
                         </div>
                     </div>
                 </div>
@@ -39,18 +39,18 @@
                         <div class="form-outline">
                             <h:inputTextarea id="description" value="#{tutorialEdit.tutorial.description}"
                                              styleClass="form-control" rows="4"/>
-                            <h:outputLabel for="description" value="Description:" styleClass="form-label"/>
+                            <h:outputLabel for="description" value="#{messages['elementEditPage.form.description']}:" styleClass="form-label"/>
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-2 p-2 text-center">
-                        <h:commandButton styleClass="btn btn-primary" value="Update"
+                        <h:commandButton styleClass="btn btn-primary" value="#{messages['elementEditPage.form.update']}"
                                          action="#{tutorialEdit.saveAction()}"/>
                     </div>
                     <div class="col-2 p-2 text-center">
-                        <h:commandButton styleClass="btn btn-secondary" value="Cancel"
+                        <h:commandButton styleClass="btn btn-secondary" value="#{messages['elementEditPage.form.cancel']}"
                                          action="#{tutorialEdit.cancelAction()}"/>
                     </div>
                 </div>

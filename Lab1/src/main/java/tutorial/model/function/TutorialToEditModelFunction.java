@@ -15,6 +15,7 @@ public class TutorialToEditModelFunction implements Function<Tutorial, TutorialE
                 .title(entity.getTitle())
                 .description(entity.getDescription())
                 .duration(entity.getDuration())
+                .version(entity.getVersion())
                 .build();
     }
 

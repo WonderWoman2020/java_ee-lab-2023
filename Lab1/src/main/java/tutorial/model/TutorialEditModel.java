@@ -34,4 +34,9 @@ public class TutorialEditModel {
      */
     private int duration;
 
+    /**
+     * Entity version.
+     */
+    private Long version;
+
 }

@@ -36,12 +36,17 @@ public class TutorialsModel implements Serializable {
         /**
          * Entity version.
          */
-        private Long version;
+        //private Long version;
 
         /**
          * Creation datetime.
          */
         private LocalDateTime creationDateTime;
+
+        /**
+         * Edition datetime.
+         */
+        private LocalDateTime editionDateTime;
 
     }
 

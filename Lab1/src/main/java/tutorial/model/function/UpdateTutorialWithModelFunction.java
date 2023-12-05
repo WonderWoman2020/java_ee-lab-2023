@@ -22,6 +22,7 @@ public class UpdateTutorialWithModelFunction implements BiFunction<Tutorial, Tut
                 .duration(request.getDuration())
                 .description(request.getDescription())
                 .skill(entity.getSkill())
+                .creationDateTime(entity.getCreationDateTime())
                 .build();
     }
 

@@ -1,9 +1,6 @@
 package entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.Version;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -25,8 +22,8 @@ public class VersionAndCreationDateAuditable {
     /**
      * Edit version fore optimistic locking.
      */
-    @Version
-    private Long version;
+    /*@Version
+    private Long version;*/
 
     /**
      * Creation date.
@@ -35,11 +32,22 @@ public class VersionAndCreationDateAuditable {
     private LocalDateTime creationDateTime;
 
     /**
+     * Edition date.
+     */
+    @Column(name = "edition_date_time")
+    private LocalDateTime editionDateTime;
+
+    /**
      * Update creation datetime.
      */
     @PrePersist
     public void updateCreationDateTime() {
         creationDateTime = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    public void updateEditionDateTime() {
+        editionDateTime = LocalDateTime.now();
     }
 
 }

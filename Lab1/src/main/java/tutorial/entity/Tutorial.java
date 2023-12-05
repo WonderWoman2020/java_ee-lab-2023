@@ -8,6 +8,7 @@ import skill.entity.Skill;
 import user.entity.User;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
@@ -50,5 +51,10 @@ public class Tutorial extends VersionAndCreationDateAuditable implements Seriali
     @Override
     public void updateCreationDateTime() {
         super.updateCreationDateTime();
+    }
+
+    @PreUpdate
+    public void updateEditionDateTime() {
+        super.updateEditionDateTime();
     }
 }

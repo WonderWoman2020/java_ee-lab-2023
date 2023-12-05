@@ -2,6 +2,7 @@ package tutorial.service;
 
 import jakarta.ejb.LocalBean;
 import jakarta.ejb.Stateless;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -15,8 +16,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-@LocalBean
-@Stateless
+//@LocalBean
+//@Stateless
+@ApplicationScoped
 @NoArgsConstructor(force = true)
 public class TutorialService {
 
@@ -39,6 +41,8 @@ public class TutorialService {
     {
         return repository.findAll();
     }
+
+    @Transactional
     public void create(Tutorial tutorial)
     {
         if (repository.find(tutorial.getId()).isPresent()) {
@@ -55,10 +59,12 @@ public class TutorialService {
 //                .ifPresent(user -> user.getCharacters().add(character));
 
     }
+    @Transactional
     public void update(Tutorial tutorial)
     {
         repository.update(tutorial);
     }
+    @Transactional
     public void delete(UUID id)
     {
         repository.delete(repository.find(id).orElseThrow());

@@ -55,7 +55,8 @@ public class TutorialView implements Serializable {
     @Getter
     private UUID skillId;
 
-    @EJB
+    //@EJB
+    @Inject
     public void setService(TutorialService tutorialService)
     {
         this.service = tutorialService;

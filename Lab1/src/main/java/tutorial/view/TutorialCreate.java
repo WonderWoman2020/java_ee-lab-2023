@@ -57,7 +57,8 @@ public class TutorialCreate implements Serializable {
     @Getter
     private List<SkillModel> skills;
 
-    @EJB
+    //@EJB
+    @Inject
     public void setTutorialService(TutorialService tutorialService)
     {
         this.tutorialService = tutorialService;

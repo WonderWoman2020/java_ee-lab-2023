@@ -5,6 +5,7 @@ import jakarta.ejb.*;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.Initialized;
 import jakarta.enterprise.event.Observes;
+import jakarta.inject.Inject;
 import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;
 import skill.entity.DifficultyLevel;
@@ -40,7 +41,8 @@ public class InitializedData {
         this.userService = userService;
     }
 
-    @EJB
+    //@EJB
+    @Inject
     public void setTutorialService(TutorialService tutorialService)
     {
         this.tutorialService = tutorialService;

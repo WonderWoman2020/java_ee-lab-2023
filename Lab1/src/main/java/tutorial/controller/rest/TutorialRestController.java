@@ -50,7 +50,8 @@ public class TutorialRestController implements TutorialController {
         this.response = response;
     }
 
-    @EJB
+    //@EJB
+    @Inject
     public void setService(TutorialService tutorialService)
     {
         this.service = tutorialService;

@@ -2,11 +2,14 @@ package tutorial.view;
 
 import component.ModelFunctionFactory;
 import jakarta.ejb.EJB;
+import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import jakarta.persistence.OptimisticLockException;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.transaction.TransactionalException;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -41,6 +44,11 @@ public class TutorialEdit implements Serializable {
     private final ModelFunctionFactory factory;
 
     /**
+     * Current faces context.
+     */
+    private final FacesContext facesContext;
+
+    /**
      * Tutorial id
      */
 
@@ -54,7 +62,8 @@ public class TutorialEdit implements Serializable {
     @Getter
     private TutorialEditModel tutorial;
 
-    @EJB
+    //@EJB
+    @Inject
     public void setService(TutorialService tutorialService)
     {
         this.service = tutorialService;
@@ -62,9 +71,10 @@ public class TutorialEdit implements Serializable {
 
     @Inject
     public TutorialEdit(
-            ModelFunctionFactory factory
-    ) {
+            ModelFunctionFactory factory,
+            FacesContext facesContext) {
         this.factory = factory;
+        this.facesContext = facesContext;
     }
 
     /**
@@ -90,10 +100,21 @@ public class TutorialEdit implements Serializable {
         return "/skill/skill_list.xhtml?faces-redirect=true";
     }
 
-    public String saveAction() {
-        service.update(factory.updateTutorial().apply(service.find(id).orElseThrow(), tutorial));
+    public String saveAction() throws IOException {
+        /*service.update(factory.updateTutorial().apply(service.find(id).orElseThrow(), tutorial));
         //return "/skill/skill_list.xhtml?faces-redirect=true";
-        return "tutorial_view?id="+id+"&faces-redirect=true";
+        return "tutorial_view?id="+id+"&faces-redirect=true";*/
+        try {
+            service.update(factory.updateTutorial().apply(service.find(id).orElseThrow(), tutorial));
+            String viewId = FacesContext.getCurrentInstance().getViewRoot().getViewId();
+            return viewId + "?faces-redirect=true&includeViewParams=true";
+        } catch (TransactionalException ex) {
+            if (ex.getCause() instanceof OptimisticLockException) {
+                init();
+                facesContext.addMessage(null, new FacesMessage("Version collision."));
+            }
+            return null ;
+        }
     }
 
 }

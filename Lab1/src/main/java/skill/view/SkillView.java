@@ -67,7 +67,8 @@ public class SkillView implements Serializable {
         this.service = skillService;
     }
 
-    @EJB
+    //@EJB
+    @Inject
     public void setTutorialService(TutorialService tutorialService)
     {
         this.tutorialService = tutorialService;

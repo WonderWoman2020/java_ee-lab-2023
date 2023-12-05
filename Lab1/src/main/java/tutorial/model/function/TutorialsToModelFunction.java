@@ -15,7 +15,7 @@ public class TutorialsToModelFunction implements Function<List<Tutorial>, Tutori
                         .map(tutorial -> TutorialsModel.Tutorial.builder()
                                 .id(tutorial.getId())
                                 .title(tutorial.getTitle())
-                                //.version(tutorial.getVersion())
+                                .version(tutorial.getVersion())
                                 .creationDateTime(tutorial.getCreationDateTime())
                                 .editionDateTime(tutorial.getEditionDateTime())
                                 .build())

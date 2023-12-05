@@ -22,8 +22,8 @@ public class VersionAndCreationDateAuditable {
     /**
      * Edit version fore optimistic locking.
      */
-    /*@Version
-    private Long version;*/
+    @Version
+    private Long version;
 
     /**
      * Creation date.

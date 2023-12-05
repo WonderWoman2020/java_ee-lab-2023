@@ -12,9 +12,11 @@ public class TutorialsToModelFunction implements Function<List<Tutorial>, Tutori
     public TutorialsModel apply(List<Tutorial> entity) {
         return TutorialsModel.builder()
                 .tutorials(entity.stream()
-                        .map(skill -> TutorialsModel.Tutorial.builder()
-                                .id(skill.getId())
-                                .title(skill.getTitle())
+                        .map(tutorial -> TutorialsModel.Tutorial.builder()
+                                .id(tutorial.getId())
+                                .title(tutorial.getTitle())
+                                .version(tutorial.getVersion())
+                                .creationDateTime(tutorial.getCreationDateTime())
                                 .build())
                         .toList())
                 .build();

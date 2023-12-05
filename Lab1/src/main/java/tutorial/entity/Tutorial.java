@@ -1,5 +1,6 @@
 package tutorial.entity;
 
+import entity.VersionAndCreationDateAuditable;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -15,10 +16,10 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @ToString()
-@EqualsAndHashCode()
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "tutorials")
-public class Tutorial implements Serializable {
+public class Tutorial extends VersionAndCreationDateAuditable implements Serializable {
 
     @Id
     private UUID id;
@@ -41,4 +42,13 @@ public class Tutorial implements Serializable {
      * Estimated learning duration in hours
      */
     private int duration;
+
+    /**
+     * This method is required due the bug in EclipseLink: https://www.eclipse.org/forums/index.php/t/820662/
+     */
+    @PrePersist
+    @Override
+    public void updateCreationDateTime() {
+        super.updateCreationDateTime();
+    }
 }

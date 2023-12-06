@@ -110,8 +110,14 @@ public class TutorialEdit implements Serializable {
             return viewId + "?faces-redirect=true&includeViewParams=true";
         } catch (TransactionalException ex) {
             if (ex.getCause() instanceof OptimisticLockException) {
-                init();
                 facesContext.addMessage(null, new FacesMessage("Version collision."));
+
+                facesContext.addMessage(null, new FacesMessage("Your data was: "));
+                facesContext.addMessage(null, new FacesMessage("Title: "+this.tutorial.getTitle()));
+                facesContext.addMessage(null, new FacesMessage("Duration: "+this.tutorial.getDuration()));
+                facesContext.addMessage(null, new FacesMessage("Description: "+this.tutorial.getDescription()));
+
+                init();
             }
             return null ;
         }
